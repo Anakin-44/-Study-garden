@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aparna's Study Logs</title>
+    <link rel="stylesheet" href="style-sheets/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <header style="text-align: center; margin-bottom: 20px; padding-top: 20px;">
+            <a href="dashboard.html" style="text-decoration:none; color:var(--brown); font-weight:bold;">← Back to Garden</a>
+            <h1 style="color:var(--brown); margin-top: 10px;">Garden History 📜</h1>
+        </header>
+
+        <div id="history-list">
+            </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const historyList = document.getElementById('history-list');
+            // This pulls the logs that dashboard.js saves
+            const logs = JSON.parse(localStorage.getItem('study_history')) || [];
+
+            if (logs.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align:center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                        <p style='color:#888;'>No past blooms yet. <br> Finish your tasks to save a memory! 🌱</p>
+                    </div>`;
+                return;
+            }
+
+            // Show newest logs first
+            logs.reverse().forEach(log => {
+                const item = document.createElement('div');
+                item.style.cssText = "background:white; padding:15px; border-radius:15px; margin-bottom:15px; box-shadow:0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid var(--sage);";
+                
+                // Logic to show a little mini-summary of tasks
+                const taskDots = log.tasks.map(t => t.completed ? '🟢' : '⚪').join(' ');
+
+                item.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--brown);">
+                        <span>📅 ${log.date}</span>
+                        <span style="color:var(--sage)">${log.score}%</span>
+                    </div>
+                    <p style="font-size:0.85rem; color:#6d4c41; margin-top:8px; font-weight: 500;">
+                        Growth Record: ${taskDots}
+                    </p>
+                `;
+                historyList.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>
