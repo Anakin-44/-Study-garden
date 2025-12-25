@@ -155,7 +155,9 @@ const myMessages = [
     "I love you😌❤",
     "I built this garden to help you study, but I think I just wanted an excuse to see your name on my screen all day.",
     "If I could rank your beauty on a scale of 0 to 100, the progress bar would break👀❤",
-    "You’re the only 'Task' I’d never want to finish—I just want to keep working on 'us' forever.💖"
+    "You’re the only 'Task' I’d never want to finish—I just want to keep working on 'us' forever.💖",
+    "I've cached all my favorite memories of us so I can replay them offline.",
+    "Focusing on your books? Good. Because later, I want you focusing entirely on me.🤭"
 ];
 
 function showSurprise() {
@@ -172,3 +174,4 @@ function showSurprise() {
 function closeSurprise() {
     document.getElementById('surprise-overlay').style.display = "none";
 }
+
