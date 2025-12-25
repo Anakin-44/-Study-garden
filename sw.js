@@ -1,4 +1,4 @@
-const cacheName = 'aparna-garden-v2';
+const cacheName = 'aparna-garden-v3';
 const assets = [
   './',
   './index.html',
@@ -55,3 +55,4 @@ self.addEventListener('fetch', e => {
   );
 
 });
+
