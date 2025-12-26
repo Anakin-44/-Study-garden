@@ -1,59 +1,90 @@
 body {
-    /* Prevents the rubber-band scrolling and pull-to-refresh */
-    overscroll-behavior-y: contain; 
-    /* Prevents the blue highlight when clicking buttons */
-    -webkit-tap-highlight-color: transparent;
-    /* Prevents accidental text selection while clicking fast */
-    user-select: none;
-    background-color: #fff9f2;
+    background-color: #f8f5f2; /* Soft warm background */
     font-family: 'Quicksand', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    overscroll-behavior-y: contain;
 }
 
 .notes-wrapper {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 header {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.nav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .back-link {
     text-decoration: none;
     color: #a47e65;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 0.9rem;
 }
 
-h1 { color: #a47e65; margin-top: 10px; }
+#save-indicator {
+    font-size: 0.75rem;
+    color: #7fb069;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h1 { 
+    color: #5d4d42; 
+    margin: 10px 0; 
+    font-size: 1.8rem; 
+}
+
+.paper-container {
+    flex-grow: 1;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: flex;
+    overflow: hidden;
+}
 
 #full-note-area {
     flex-grow: 1;
     width: 100%;
-    padding: 10px 20px 10px 50px; /* Extra left padding for the red margin line */
+    padding: 32px 20px 32px 55px; /* Aligned with line height */
     border: none;
-    border-radius: 15px;
-    background: white;
-    
-    /* THE MAGIC: Lined paper + Red Margin */
-    background-image: 
-        linear-gradient(90deg, transparent 39px, #abced4 39px, #abced4 41px, transparent 41px), /* Vertical Blue/Red Line */
-        linear-gradient(#eee .1em, transparent .1em); /* Horizontal Lines */
-    background-size: 100% 30px; /* This must be exactly 30px */
-    
-    /* THE SYNC: Text must match the 30px background size */
-    line-height: 30px; 
-    padding-top: 30px; /* Align first line of text to first line of paper */
-    
+    outline: none;
+    resize: none;
     font-size: 1.1rem;
     font-family: 'Quicksand', sans-serif;
     color: #444;
-    outline: none;
-    resize: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    
+    /* THE MAGIC: 32px Line Height and Background Size must match */
+    line-height: 32px; 
+    background-attachment: local;
+    background-image: 
+        /* The Pink Margin Line */
+        linear-gradient(to right, transparent 45px, #ffadad 45px, #ffadad 46px, transparent 46px),
+        /* The Blue Horizontal Lines */
+        linear-gradient(to bottom, #eef6f7 1px, transparent 1px);
+    background-size: 100% 32px;
+    
+    background-color: white;
+}
+
+/* Smooth scrollbar for Chrome/Safari */
+#full-note-area::-webkit-scrollbar {
+    width: 5px;
+}
+#full-note-area::-webkit-scrollbar-thumb {
+    background: #e0d8d0;
+    border-radius: 10px;
 }

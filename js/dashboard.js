@@ -219,3 +219,4 @@ function updateSidebarBadge(progress) {
     const sideBadge = document.getElementById('side-syllabus-stat');
     if(sideBadge) sideBadge.innerText = progress + "%";
 }
+

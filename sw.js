@@ -7,10 +7,13 @@ const assets = [
   './library.html',
   './notes.html',
   './syllabus.html',
+  './test.html',
   './manifest.json',
   // JavaScript folder
   './js/auth.js',
   './js/dashboard.js',
+  './js/test.js',
+  './js/test-data.js',
   './js/library.js',
   './js/syllabus-script.js',
   // Stylesheets folder
@@ -21,7 +24,8 @@ const assets = [
   './style-sheets/syllabus.css',
   // Assets folder
   './assets/icon.png',
-  './assets/new.mp4'
+  './assets/new.mp4',
+  './assets/pop.mp3'
 ];
 
 // 1. Install Event: Save all files to the phone's cache
@@ -53,7 +57,4 @@ self.addEventListener('fetch', e => {
       return cacheRes || fetch(e.request);
     })
   );
-
 });
-
-
