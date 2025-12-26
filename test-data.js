@@ -1,256 +1,96 @@
 const quizData = {
-    "Maths": {
-        "Percentage": [
-            {
-                "q": "Rohit Sharma scored 264 runs which included 28 boundaries and 18 sixes. What per cent of his total score did he make by running between the wickets?",
-                "options": ["15%", "15.75%", "16.66%", "33.33%"],
-                "correct": 2 // [cite: 84, 85]
-            },
-            {
-                "q": "A person spends 62.5% of his income. If his income increases by 37.5% and expenditure increases by 80% but savings decreases by Rupees 1200 then find his initial income.",
-                "options": ["1200", "2400", "9600", "10800"],
-                "correct": 2 // [cite: 84, 89]
-            },
-            {
-                "q": "In a city number of female is 12.5% more than the number of children, but 20% more than the number of males. If the number of male increases in ratio 5:6 but the number of female increases by 22 2/9% and in the number of children increases by 630. Due to this total population increases by 28 4/7%. Find the increment in the number of females.",
-                "options": ["320", "340", "360", "380"],
-                "correct": 2 // [cite: 84, 94]
-            },
-            {
-                "q": "A and B invest in a business in the ratio of 6: 7. A spend 60% of its amount in electricity and 20% of rest on medical, whereas B spends 40% of its amount on personal expenses and 60% of the rest on Goods charges. The total amount left with them is Rupees 36,000 then calculate their individual sum.",
-                "options": ["60000 and 60000", "60000 and 70000", "70000 and 70000", "70000 and 80000"],
-                "correct": 1 // [cite: 84, 94]
-            },
-            {
-                "q": "A person went to the shopping mall, he starts buying items costing 1, 2, 3, 4, 5... upto 20 terms. Also, he spends 75% of the total amount of buying a shirt. Now he is left with Rupees 190 then calculates the original amount he had.",
-                "options": ["1800", "1600", "2000", "2200"],
-                "correct": 1 // [cite: 84, 95]
-            },
-            {
-                "q": "There were only two candidates in an election, 10% of the voter list did not cast their votes and 68 voters cast their ballot paper blank. The winner was supported by 47% of all voters in the list and he got 368 votes more than the rival. The number of voters on the list was:",
-                "options": ["7,500", "8,000", "8,500", "6,500"],
-                "correct": 0 // [cite: 84, 95]
-            },
-            {
-                "q": "In a company number of employees is increased by a% and also time duration is increased by a% Due to this production of the company increases by 224%. If a total of 440 new employees joins the company then find the initial number of employees in the company.",
-                "options": ["300", "400", "500", "550"],
-                "correct": 3 // [cite: 84, 96]
-            },
-            {
-                "q": "The price of rice is increased by 22.22%, then increased by a% and again it is reduced by 15 5/8%. But a person reduced his consumption by 35% and his expenditure is 2.5% less than previous. Find the value of a.",
-                "options": ["45.45%", "204%", "20.4%", "55.45%"],
-                "correct": 0 // [cite: 84, 96]
-            },
-            {
-                "q": "In a cylinder, the ratio of radius and height is 1: 2. If the radius is increased by 50% and height is decreased by 40%. Find the percentage change in volume of the cylinder.",
-                "options": ["25%", "30%", "33%", "35%"],
-                "correct": 3 // [cite: 84, 99]
-            },
-            {
-                "q": "In a cuboid breadth is decreased by 11 1/9%. Length is decreased by 12.5% and height is decreased by 10%. What is the effect on the original value?",
-                "options": ["30% decrease", "30% increase", "40% decrease", "40% increase"],
-                "correct": 0 // [cite: 84, 102]
-            },
-            {
-                "q": "The monthly income of a person was Rupees 15300/- and his monthly expenditure was 10200. If his income increased by 15% and expenditure increased by 10%. The % increase or decrease in savings?",
-                "options": ["20% Increase", "25% Decrease", "20% decrease", "25% Increase"],
-                "correct": 3 // [cite: 84, 104]
-            },
-            {
-                "q": "The salary of an officer, 10% is deducted as house rent. 15% of the rest he spends on children education and 10% of the balance, he spends on clothes. After this expenditure, he is left with him as Rupees 4,131. What is his salary?",
-                "options": ["4000", "4500", "5000", "6000"],
-                "correct": 3 // [cite: 84, 105]
-            },
-            {
-                "q": "If 135 is increased by X% and 405 is decreased by y%. Results are equal, then x/2% of 180 is what % more than (100+x%) of 75?",
-                "options": ["60%", "50%", "30%", "20%"],
-                "correct": 0 // [cite: 105]
-            },
-            {
-                "q": "The price of an article was increased by X% and again decreased by X%. If the latest price was Rupees 1. Then the original price was?",
-                "options": ["10000/(10000-x^2)", "10000/(1000-x^2)", "1000/(10000+x^2)", "None of these"],
-                "correct": 0 // [cite: 106]
-            },
-            {
-                "q": "Price of diesel increased from Rupees 45/Litre to 50/litre How much should the consumption of diesel be reduced (in%) so as to increase expenditure by only 5%?",
-                "options": ["4.5%", "5.25%", "5%", "5.5%"],
-                "correct": 3 // [cite: 106]
-            },
-            {
-                "q": "If 223% A = 2007% of B and B = X% of A, then the value of x is?",
-                "options": ["11.11%", "10%", "12.5%", "11.5%"],
-                "correct": 0 // [cite: 107]
-            },
-            {
-                "q": "30 Litres of water is added to 60 litres of a solution containing 30% alcohol in water. What is the concentration of alcohol in solution now?",
-                "options": ["45%", "46%", "46.66%", "45.66%"],
-                "correct": 2 // [cite: 107]
-            },
-            {
-                "q": "The monthly salary of A and B together are amounts of Rs. 40000. A spends 85% of his salary and B spends 95% of his salary. If their saving is same then the salary of A is?",
-                "options": ["10,000", "8,000", "9,500", "12,000"],
-                "correct": 0 // [cite: 109]
-            },
-            {
-                "q": "If the salary of Sonu is 37.5% less than the Monu, then salary of Monu is how much percentage more than Sonu?",
-                "options": ["45%", "50%", "60%", "166.66%"],
-                "correct": 2 // [cite: 109]
-            },
-            {
-                "q": "The price of petrol is increased by 66.66%. By how much % a car driver should reduce his consumption of petrol so that there is no extra expenditure?",
-                "options": ["40%", "75%", "60%", "70%"],
-                "correct": 0 // [cite: 109]
-            },
-            {
-                "q": "The price of sugar is reduced by 20%. Now, a person can buys 5 kg more sugar for Rs. 320. What is the reduced price of sugar per Kg?",
-                "options": ["12.8", "13.8", "14.8", "15.8"],
-                "correct": 0 // [cite: 110, 111]
-            },
-            {
-                "q": "The population of a city decreases by 100/17%, 100/13% and 100/23% respectively in three years. If the population of the city the decreases by 3680 during 2nd year then find the total decrement in population for three years.",
-                "options": ["8590", "8580", "8560", "8540"],
-                "correct": 0 // [cite: 111, 113]
-            },
-            {
-                "q": "Rohit spent of his 100/19% on food and 100/9% of remaining part on medicine and donate Rs. 400 and finally 25/3% of remaining part on travelling and save Rupees 5500. Find the difference between his expenditure on food and travelling.",
-                "options": ["100/-", "200/-", "300/-", "400/-"],
-                "correct": 0 // [cite: 114]
-            },
-            {
-                "q": "Price of a commodity is first increased by X% and then decreased by x%. If the new price is A/100 then find the original price.",
-                "options": ["100(100-x^2)", "100A/(100-x^2)", "100A/(1-x^2)", "100(100A-x^2)"],
-                "correct": 1 // Answer based on standard percentage formula patterns in similar PDF problems
-            },
-            {
-                "q": "A man went to the market with Rs.1200 in his pocket. He spent 33.33% on buying medicine. 5x% of the remaining on buying food items and he spent 50% of the remaining on travelling, at last, he left with him Rupees 360. Find 5x%",
-                "options": ["20%", "15%", "10%", "25%"],
-                "correct": 2 // [cite: 44]
-            },
-            {
-                "q": "The price of the entry ticket of a theatre increases by Rupees 70 but the number of visitors decreases by 50/3% and total revenue increases by Rupees 5000. If the initial price of the ticket is Rupees 210 then find the initial revenue of the theatre.",
-                "options": ["45000/-", "30000/-", "60000/-", "50000/-"],
-                "correct": 1 // [cite: 48, 49]
-            },
-            {
-                "q": "Australia scored a total of Z runs in 20 over. India ties the scores in 20% fewer over. If the initial average run rate had been 100/3% higher. The scores would have been tied earlier in how many over?",
-                "options": ["8 Over", "10 Over", "6 over", "12 Over"],
-                "correct": 3 // [cite: 57]
-            },
-            {
-                "q": "Sanjeev, a salesman is appointed on the basic salary of Rupees 1500 per month and the condition that for every sale of Rupees 20,000, he will get 20% of basic salary and 20% of the sales as a reward. What should be the value of sales if he wants to earn 23,000/- rupees?",
-                "options": ["90000", "60000", "120000", "145000"],
-                "correct": 2 // [cite: 60]
-            },
-            {
-                "q": "In a city 60% are male and remaining are females. Out of total males, 25% are government employees. Unemployed male difference is 6510. Find total government employees (male and female).",
-                "options": ["12,650", "13,650", "11,750", "10,500"],
-                "correct": 1 // [cite: 64]
-            },
-            {
-                "q": "Sonu spends 11.76% on rent, 20% of rest on goods, 5.55% of rest on clothes and 46.66% on travelling. He gives 11.11% to a friend. Salary is 31500. Find savings.",
-                "options": ["6,575", "7,000", "7,700", "8,500"],
-                "correct": 2 // [cite: 66]
-            },
-            {
-                "q": "A boy subtracted the sum of 1/5 and 1/8 from unit and expressed as 0.075. Percentage of errors?",
-                "options": ["89.99%", "66.66%", "88.88%", "67.77%"],
-                "correct": 2 // [cite: 67]
-            },
-            {
-                "q": "England success rate is 80% against India. England lost next 90 ODI's and rate came to 40%. Total ODI's played?",
-                "options": ["140", "180", "160", "200"],
-                "correct": 1 // [cite: 70]
-            },
-            {
-                "q": "Amit scored 74, 67, 62, 60. How much in 5th exam to have aggregate > 70%?",
-                "options": ["> 87", "< 85", "= 79", "= 67"],
-                "correct": 0 // [cite: 72]
-            },
-            {
-                "q": "An alloy of gold and zinc weight of 80 grams. It contains 70% gold. How much gold should be added so percentage is 90%?",
-                "options": ["12 grams", "15.66 grams", "160 grams", "16 grams"],
-                "correct": 2 // [cite: 34]
-            },
-            {
-                "q": "In an examination, 52% failed in math, 30% failed in Hindi, 15% failed in both. If 198 passed both, total candidates?",
-                "options": ["350", "300", "600", "675"],
-                "correct": 2 // [cite: 35]
-            },
-            {
-                "q": "Ratio of students passing only maths and only physics is 7:15. Ratio of both pass and both fail is 1:3. Total students?",
-                "options": ["300", "250", "210", "200"],
-                "correct": 3 // [cite: 36]
-            },
-            {
-                "q": "Student gets 33.45% and fails by 23. Another gets 44.45% and is 32 over pass marks. Pass percentage?",
-                "options": ["38.05%", "39.5%", "37.5%", "33.33%"],
-                "correct": 0 // [cite: 37]
-            },
-            {
-                "q": "Party guests female is 2x male. 50% male like soft drink, 20% like both. Difference in hard drink only is 100. Total guests?",
-                "options": ["3,200", "2,500", "3,000", "2,700"],
-                "correct": 2 // [cite: 38]
-            },
-            {
-                "q": "Gas pressure change: molecules decrease 50/3%, Temp increase 12.5%, Volume decrease 8.33%. Pressure change?",
-                "options": ["15.75%", "14.77%", "16.75%", "12.5%"],
-                "correct": 3 // [cite: 39]
-            },
-            {
-                "q": "Maternity Center: 15% of cases are twins. Approximate percentage of twins out of total children?",
-                "options": ["27.75%", "22.75%", "26.08%", "33.05%"],
-                "correct": 2 // [cite: 40]
-            },
-            {
-                "q": "Machine depreciates by 50/3% yearly. Present value 108000. Value after 3 years?",
-                "options": ["62,500", "65,500", "45,675", "52,590"],
-                "correct": 0 // [cite: 41]
-            },
-            {
-                "q": "Liquid 1 has 26.66% water, Liquid 2 has 25%. Filled 15 parts of L1 and 8 parts of L2. New water %?",
-                "options": ["600/23%", "300/23%", "150/17%", "390/17%"],
-                "correct": 0 // [cite: 42]
-            },
-            {
-                "q": "Add pure alcohol to 600 litres of 50/3% solution to make it 36% concentration. Amount?",
-                "options": ["183.26 litres", "175.75 litres", "181.25 litres", "171.75 litres"],
-                "correct": 2 // [cite: 43]
-            },
-            {
-                "q": "Mine has 80% metal. Gold is 5/6% of metals, rest is lead. Mass of ore is 12000kg. Mass of lead?",
-                "options": ["8,950Kg", "1,205Kg", "1,025Kg", "9,520Kg"],
-                "correct": 3 // [cite: 44]
-            },
-            {
-                "q": "A income 40% less than B. A expenditure 75% of B. A income 80% of B expenditure. Saving diff 5100. B savings?",
-                "options": ["Rs. 6,500/-", "Rs. 7,500/-", "Rs. 8,000/-", "Rs. 6,000/-"],
-                "correct": 1 // [cite: 45]
-            },
-            {
-                "q": "30kg watermelon has 80% water. Later water is 60%. Present weight?",
-                "options": ["15Kg", "18Kg", "20Kg", "13.5Kg"],
-                "correct": 0 // [cite: 46]
-            },
-            {
-                "q": "Cost of table is 47 1/17% more than chair. 15 chairs is what % more/less than 12 tables?",
-                "options": ["12.5% More", "14.75% less", "15% less", "16.66% More"],
-                "correct": 2 // [cite: 47, 77]
-            },
-            {
-                "q": "Students ratio 5:7:9 with success 70%, 85.5%, 96.5%. Total successful %?",
-                "options": ["86.51%", "86.52%", "88.66%", "88.55%"],
-                "correct": 1 // [cite: 79, 80]
-            },
-            {
-                "q": "20% soldiers killed, 35% of rest die of corona, 50/3% of rest disabled. 1757600 left. Beginning total?",
-                "options": ["556500", "4456000", "4056000", "4546000"],
-                "correct": 2 // [cite: 82, 83]
-            },
-            {
-                "q": "Tax decreases by 33.33% and consumption increases by 50/3%. Revenue effect %?",
-                "options": ["35.65%", "33.33%", "34%", "28.75%"],
-                "correct": 1 // 
-            }
+    "Responsive Web Design": {
+        "Module I: HTML Basics": [
+            { "q": "Which tag is used to define the root of an HTML document?", "options": ["head", "body", "html", "!DOCTYPE"], "correct": 2 },
+            { "q": "What is the correct tag for a line break?", "options": ["lb", "break", "br", "hr"], "correct": 2 },
+            { "q": "Which attribute is used to provide the destination URL for a hyperlink?", "options": ["src", "link", "href", "target"], "correct": 2 },
+            { "q": "Which tag is used to create an unordered list?", "options": ["ol", "ul", "li", "list"], "correct": 1 },
+            { "q": "Which HTML element is used for the largest heading?", "options": ["head", "h6", "heading", "h1"], "correct": 3 }
+        ],
+        "Module II: HTML5 Features": [
+            { "q": "Which of these is a semantic HTML5 tag?", "options": ["div", "span", "article", "b"], "correct": 2 },
+            { "q": "Which HTML5 API allows storing data in the browser with no expiration date?", "options": ["Session Storage", "Local Storage", "Cookies", "Cache Storage"], "correct": 1 },
+            { "q": "Which HTML5 element is used to draw graphics via JavaScript?", "options": ["canvas", "paint", "svg", "draw"], "correct": 0 },
+            { "q": "In HTML5, which attribute is used to specify that an input field must be filled out?", "options": ["validate", "placeholder", "required", "check"], "correct": 2 },
+            { "q": "Which new HTML5 tag is used to wrap a self-contained content like a photo with a caption?", "options": ["figure", "section", "aside", "header"], "correct": 0 }
+        ],
+        "Module III: Mastering CSS3": [
+            { "q": "In the CSS Box Model, which layer is between the padding and the margin?", "options": ["Content", "Outline", "Border", "Background"], "correct": 2 },
+            { "q": "Which property is used to create a 'hover' transition effect?", "options": ["animation", "transform", "transition", "display"], "correct": 2 },
+            { "q": "Which CSS property controls the text size?", "options": ["font-style", "text-size", "font-size", "text-style"], "correct": 2 },
+            { "q": "How do you select an element with id 'demo' in CSS?", "options": [".demo", "demo", "#demo", "*demo"], "correct": 2 },
+            { "q": "Which property is used to change the background color?", "options": ["color", "background-color", "bgcolor", "fill-color"], "correct": 1 }
+        ],
+        "Module IV: Responsive Design": [
+            { "q": "Which meta tag is crucial for making a website mobile-responsive?", "options": ["charset", "description", "viewport", "author"], "correct": 2 },
+            { "q": "In Flexbox, which property defines the main axis alignment?", "options": ["align-items", "justify-content", "flex-direction", "flex-wrap"], "correct": 1 },
+            { "q": "Which property is required on a parent element to turn it into a Flex Container?", "options": ["display: block;", "display: flex;", "flex-direction: row;", "align-items: center;"], "correct": 1 },
+            { "q": "In CSS Grid, what does the 'fr' unit stand for?", "options": ["Fixed Radius", "Font Relative", "Fractional unit of available space", "Frame Rate"], "correct": 2 },
+            { "q": "Which Flexbox property allows items to move to the next line if there isn't enough space?", "options": ["flex-flow", "flex-wrap", "justify-content", "align-content"], "correct": 1 }
+        ],
+        "Module V: JavaScript": [
+            { "q": "Which keyword is used to declare a variable that cannot be reassigned?", "options": ["var", "let", "const", "static"], "correct": 2 },
+            { "q": "What does DOM stand for?", "options": ["Data Object Model", "Document Object Model", "Digital Object Management", "Document Order Model"], "correct": 1 },
+            { "q": "Which built-in method adds one or more elements to the end of an array?", "options": ["pop()", "shift()", "push()", "unshift()"], "correct": 2 },
+            { "q": "How do you write 'Hello World' in an alert box?", "options": ["msg('Hello World')", "alertBox('Hello World')", "msgBox('Hello World')", "alert('Hello World')"], "correct": 3 },
+            { "q": "Which operator is used to assign a value to a variable?", "options": ["*", "-", "=", "x"], "correct": 2 }
+        ],
+        "Module VI: Bootstrap": [
+            { "q": "How many columns are in the default Bootstrap grid system?", "options": ["6", "10", "12", "16"], "correct": 2 },
+            { "q": "Which class is used to make an image responsive in Bootstrap 5?", "options": [".img-responsive", ".img-fluid", ".img-fit", ".container-img"], "correct": 1 },
+            { "q": "Which Bootstrap class provides a full-width container?", "options": [".container", ".container-fixed", ".container-fluid", ".container-all"], "correct": 2 },
+            { "q": "In Bootstrap, which class is used to create a button with a blue background?", "options": [".btn-info", ".btn-primary", ".btn-link", ".btn-blue"], "correct": 1 },
+            { "q": "Which utility class is used to center text in Bootstrap?", "options": [".text-center", ".align-center", ".justify-center", ".center-text"], "correct": 0 }
+        ]
+    },
+    "Object Oriented Programming": {
+        "Unit I: Intro to OOP": [
+            { "q": "Which concept allows hiding the internal details of an object?", "options": ["Inheritance", "Polymorphism", "Encapsulation", "Dynamic Binding"], "correct": 2 },
+            { "q": "What is the process by which one object acquires the properties of another?", "options": ["Abstraction", "Inheritance", "Encapsulation", "Message Passing"], "correct": 1 },
+            { "q": "Which of the following is an 'abstract' data type in C++?", "options": ["int", "double", "class", "char"], "correct": 2 },
+            { "q": "Wrapping of data and functions into a single unit is called:", "options": ["Abstraction", "Encapsulation", "Polymorphism", "Inheritance"], "correct": 1 },
+            { "q": "Which feature of OOP facilitates code reusability?", "options": ["Inheritance", "Abstraction", "Polymorphism", "Encapsulation"], "correct": 0 }
+        ],
+        "Unit II: Functions & Overloading": [
+            { "q": "Which function type reduces the overhead of a function call by replacing the call with code?", "options": ["Virtual Function", "Friend Function", "Inline Function", "Static Function"], "correct": 2 },
+            { "q": "When two or more functions have the same name but different parameters, it is called:", "options": ["Function Overriding", "Function Overloading", "Encapsulation", "Recursion"], "correct": 1 },
+            { "q": "A function that can access private members of a class even though it is not a member is a:", "options": ["Static Function", "Virtual Function", "Inline Function", "Friend Function"], "correct": 3 }
+        ],
+        "Unit III: Classes & Operators": [
+            { "q": "A constructor has the same name as the class and...", "options": ["Returns int", "Returns void", "Has no return type", "Returns an object"], "correct": 2 },
+            { "q": "Which operator cannot be overloaded in C++?", "options": ["+", "-", "::", "++"], "correct": 2 },
+            { "q": "The destructor's name is preceded by which symbol?", "options": ["!", "~", "#", "$"], "correct": 1 },
+            { "q": "Static member functions can only access:", "options": ["Private data", "Public data", "Static data", "Dynamic data"], "correct": 2 }
+        ],
+        "Unit IV: Inheritance & Files": [
+            { "q": "Which type of inheritance involves one class being derived from another derived class?", "options": ["Multiple", "Multilevel", "Hierarchical", "Single"], "correct": 1 },
+            { "q": "Which stream class is used for writing data to a file?", "options": ["ifstream", "ofstream", "fstream", "iostream"], "correct": 1 }
+        ]
+    },
+    "Advanced Operating Systems": {
+        "Unit I: OS Introduction": [
+            { "q": "Which system structure organizes the OS into layers, each built on top of lower layers?", "options": ["Monolithic", "Microkernel", "Layered Approach", "Hybrid"], "correct": 2 },
+            { "q": "What is the primary purpose of an Operating System?", "options": ["To build hardware", "To act as an interface between user and hardware", "To create documents", "To browse the internet"], "correct": 1 },
+            { "q": "Which system type allows multiple processors to share a single clock and memory?", "options": ["Distributed", "Clustered", "Parallel/Multi-processor", "Single Processor"], "correct": 2 }
+        ],
+        "Unit II: Process Management": [
+            { "q": "What is a 'Context Switch'?", "options": ["Changing the OS theme", "Saving state of an old process and loading a new one", "Moving a process to the bin", "A hardware failure"], "correct": 1 },
+            { "q": "Which scheduling algorithm gives each process a small unit of CPU time (time quantum)?", "options": ["FCFS", "SJF", "Round Robin", "Priority Scheduling"], "correct": 2 },
+            { "q": "The state of a process after it has finished execution is:", "options": ["Ready", "Running", "Waiting", "Terminated"], "correct": 3 }
+        ],
+        "Unit III: Synchronization & Deadlocks": [
+            { "q": "Which of these is NOT a necessary condition for a deadlock?", "options": ["Mutual Exclusion", "No Preemption", "Circular Wait", "Paging"], "correct": 3 },
+            { "q": "A semaphore is a/an _______ variable used for process synchronization.", "options": ["String", "Integer", "Boolean", "Float"], "correct": 1 },
+            { "q": "The Banker's algorithm is used for Deadlock:", "options": ["Prevention", "Avoidance", "Detection", "Recovery"], "correct": 1 }
+        ],
+        "Unit IV: Storage Management": [
+            { "q": "What is the main cause of 'Thrashing'?", "options": ["Low CPU speed", "Frequent page faults", "Too much RAM", "Paging algorithms being too fast"], "correct": 1 },
+            { "q": "Which memory management scheme allows the physical address space of a process to be non-contiguous?", "options": ["Contiguous Allocation", "Paging", "Swapping", "Switched Memory"], "correct": 1 },
+            { "q": "In Virtual Memory, what does 'Demand Paging' mean?", "options": ["Pages are loaded only when requested", "All pages are loaded at startup", "Memory is swapped to the cloud", "Hard disk is partitioned"], "correct": 0 }
+        ],
+        "Unit V: File & Disk Management": [
+            { "q": "Which disk scheduling algorithm services requests in the order they arrive?", "options": ["SCAN", "SSTF", "FCFS", "C-LOOK"], "correct": 2 },
+            { "q": "The process of dividing a disk into sectors that the disk controller can read/write is:", "options": ["Partitioning", "Logical Formatting", "Physical Formatting", "Booting"], "correct": 2 }
         ]
     }
 };

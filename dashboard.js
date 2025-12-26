@@ -6,25 +6,33 @@ const percentText = document.getElementById('percent');
 const plant = document.getElementById('plant-stage');
 const syllabusStat = document.getElementById('syllabus-stat');
 
+// --- AUDIO ASSETS ---
+// Make sure you have a file named 'pop.mp3' in your assets folder
+const taskSound = new Audio('assets/pop.mp3'); 
+
+// --- PERMANENT TASKS ---
+const DEFAULT_TASKS = [
+    "Drink 1 Lt water",
+    "Workout",
+    "Talk to your Kechua"
+];
+
 // --- INITIALIZE APP ---
 document.addEventListener('DOMContentLoaded', () => {
-    checkAndResetDay(); // 1. Archive yesterday's work if date changed
-    updateClock();      // 2. Start the clock
-    loadDailyTasks();   // 3. Load today's tasks
-    updateGarden();     // 4. Sync the plant video and progress bar
+    checkAndResetDay(); 
+    updateClock();      
+    loadDailyTasks();   
+    updateGarden();     
 });
 
-// --- THE ARCHIVE & RESET LOGIC (History Fix) ---
+// --- THE ARCHIVE & RESET LOGIC ---
 function checkAndResetDay() {
-    const today = new Date().toDateString(); // e.g., "Tue Dec 23 2025"
+    const today = new Date().toDateString(); 
     const lastOpened = localStorage.getItem('last_opened_date');
 
-    // If it's a brand new day
     if (lastOpened && lastOpened !== today) {
         archiveToHistory(lastOpened);
     }
-
-    // Update the "last opened" tracker to today
     localStorage.setItem('last_opened_date', today);
 }
 
@@ -32,22 +40,18 @@ function archiveToHistory(oldDate) {
     const dailyTasks = JSON.parse(localStorage.getItem('sayli_daily')) || [];
     
     if (dailyTasks.length > 0) {
-        // Calculate the score for that day
         const total = dailyTasks.length;
         const done = dailyTasks.filter(t => t.completed).length;
         const score = Math.round((done / total) * 100);
 
-        // Get existing history or start new list
         const history = JSON.parse(localStorage.getItem('study_history')) || [];
         
-        // Add yesterday's data to the top of the list
         history.unshift({
             date: oldDate,
             score: score,
             tasks: dailyTasks
         });
 
-        // Save history and CLEAR the daily list for the new day
         localStorage.setItem('study_history', JSON.stringify(history));
         localStorage.removeItem('sayli_daily');
     }
@@ -57,39 +61,62 @@ function archiveToHistory(oldDate) {
 function loadDailyTasks() {
     const saved = JSON.parse(localStorage.getItem('sayli_daily')) || [];
     taskList.innerHTML = "";
-    saved.forEach(t => renderTask(t.text, t.completed));
+
+    DEFAULT_TASKS.forEach(taskText => {
+        const existingDefault = saved.find(t => t.text === taskText);
+        const isDone = existingDefault ? existingDefault.completed : false;
+        renderTask(taskText, isDone, true);
+    });
+
+    const customTasks = saved.filter(t => !DEFAULT_TASKS.includes(t.text));
+    customTasks.forEach(t => renderTask(t.text, t.completed, false));
+    
+    saveData();
 }
 
 function addTask() {
     const val = taskInput.value.trim();
     if(!val) return;
-    renderTask(val, false);
+    renderTask(val, false, false);
     saveData();
     taskInput.value = "";
     updateGarden();
 }
 
-function renderTask(text, isDone) {
+function renderTask(text, isDone, isDefault) {
     const div = document.createElement('div');
     div.className = 'task-item';
+    if(isDefault) div.classList.add('permanent-task');
+
     div.innerHTML = `
         <input type="checkbox" class="checker" ${isDone ? 'checked' : ''} onchange="toggleTask(this)">
         <span class="${isDone ? 'done-text' : ''}">${text}</span>
-        <button onclick="deleteTask(this)" style="margin-left:auto; border:none; background:none; cursor:pointer;">❌</button>
+        ${isDefault 
+            ? `<span style="margin-left:auto; font-size: 12px; opacity: 0.5;">🔒</span>` 
+            : `<button onclick="deleteTask(this)" style="margin-left:auto; border:none; background:none; cursor:pointer;">❌</button>`
+        }
     `;
     taskList.appendChild(div);
 }
 
+// --- UPDATED TOGGLE TASK (Sound + Confetti) ---
 function toggleTask(cb) {
     cb.nextElementSibling.classList.toggle('done-text');
+    
     if (cb.checked) {
+        // 1. Play Sound
+        taskSound.currentTime = 0; 
+        taskSound.play().catch(e => console.log("Audio play blocked until user interacts"));
+
+        // 2. Small Confetti Burst for task
         confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 },
-            colors: ['#7fb069', '#f2c6c2', '#a47e65'] // Using Sayli's app colors!
+            particleCount: 30,
+            spread: 50,
+            origin: { y: 0.8 },
+            colors: ['#7fb069', '#f2c6c2', '#ffffff']
         });
     }
+
     saveData();
     updateGarden();
 }
@@ -111,9 +138,8 @@ function saveData() {
     localStorage.setItem('sayli_daily', JSON.stringify(tasks));
 }
 
-// --- THE GARDEN (VIDEO & SYLLABUS LOGIC) ---
+// --- GARDEN & CLOCK ---
 function updateGarden() {
-    // 1. TODAY'S BAR (Based on Checkboxes)
     const all = document.querySelectorAll('.checker');
     const checked = document.querySelectorAll('.checker:checked');
     const dailyPercent = all.length ? Math.round((checked.length / all.length) * 100) : 0;
@@ -121,18 +147,14 @@ function updateGarden() {
     if(fill) fill.style.width = dailyPercent + "%";
     if(percentText) percentText.innerText = dailyPercent;
 
-    // 2. VIDEO SYLLABUS LOGIC
     const video = document.getElementById('plant-video');
     const sscProgress = parseInt(localStorage.getItem('total_ssc_progress')) || 0;
     
-    if(syllabusStat) syllabusStat.innerText = sscProgress + "%";
+    updateSidebarBadge(sscProgress); // Sync badge
 
     if (video) {
-        if (video.readyState >= 1) {
-            syncVideo(video, sscProgress);
-        } else {
-            video.onloadedmetadata = () => syncVideo(video, sscProgress);
-        }
+        if (video.readyState >= 1) syncVideo(video, sscProgress);
+        else video.onloadedmetadata = () => syncVideo(video, sscProgress);
     }
 }
 
@@ -143,7 +165,6 @@ function syncVideo(video, progress) {
     video.currentTime = targetTime;
 }
 
-// --- CLOCK ---
 function updateClock() {
     const now = new Date();
     const dEl = document.getElementById('current-date');
@@ -156,59 +177,46 @@ setInterval(updateClock, 1000);
 taskInput.addEventListener("keypress", (e) => { if(e.key === "Enter") addTask(); });
 
 const myMessages = [
-    "Pdh lo 😓🤧YSL ki ksm tumhee ✨",
-    "If you study well,🌝i'll bring you bareilly wala jhumka 🌸",
-    "Pdhooooooooooo!!!💖",
-    " well...🌝HR ki bio me tumhari post ka name kesa lgegaa✨",
-    "Imagine lakho ki ghuus 😭😭🌷",
-    "World tour v kr skte😓"
+    "Even lattu wants you to take care of yourself",
+    "You're the only 'Task' I’d never want to finish—I just want to keep working on 'us' forever. 💖",
+    "My heart doesn't have a 'Guest Mode.' You have full Admin access. 🔑",
+    "Take a break, baby. I have a much better reward waiting for you than a progress bar. 😜",
+    "I've cached all my favorite memories of us so I can replay them offline. 📜",
+    "Study hard, but remember: you're already the topper in the only subject I care about... Me. 😌❤",
+    "You’re my favorite notification. Everything else is just noise. 📱✨",
+    "I’d trade all my code for just one more minute of your smile. 💎",
+    "Warning: Looking at you for too long causes my system to crash. You're too beautiful. ⚠️❤️"
 ];
 
-// FOR THE JAR SURPRISE
+// --- UPDATED SURPRISE (Big Confetti) ---
 function showSurprise() {
     const modal = document.getElementById('surprise-overlay');
     const textEl = document.getElementById('surprise-text');
-    const sound = document.getElementById('pop-sound');
-
-    // Play your custom sound
-    if (sound) {
-        sound.currentTime = 0; 
-        sound.play().catch(e => console.log("Sound play blocked until user interacts"));
-    }
-
-    // Fire Confetti
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#7fb069', '#f2c6c2', '#a47e65'],
-        zIndex: 3000
-    });
-
     const randomMsg = myMessages[Math.floor(Math.random() * myMessages.length)];
     textEl.innerText = randomMsg;
     modal.style.display = "flex";
+
+    // Big Confetti Blast
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 }
-
-// FOR TASK COMPLETION (Update your existing toggleTask)
-function toggleTask(cb) {
-    cb.nextElementSibling.classList.toggle('done-text');
-    
-    if (cb.checked) {
-        const sound = document.getElementById('pop-sound');
-        if (sound) { sound.currentTime = 0; sound.play(); }
-
-        confetti({
-            particleCount: 50,
-            spread: 50,
-            origin: { y: 0.8 },
-            colors: ['#7fb069', '#f2c6c2']
-        });
-    }
-    saveData();
-    updateGarden();
-};
 
 function closeSurprise() {
     document.getElementById('surprise-overlay').style.display = "none";
-};
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+}
+
+function updateSidebarBadge(progress) {
+    const sideBadge = document.getElementById('side-syllabus-stat');
+    if(sideBadge) sideBadge.innerText = progress + "%";
+}
+
