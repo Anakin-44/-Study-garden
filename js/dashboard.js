@@ -12,9 +12,9 @@ const taskSound = new Audio('assets/pop.mp3');
 
 // --- PERMANENT TASKS ---
 const DEFAULT_TASKS = [
-    "Drink 1.5lt water",
+    "Drink 1 Lt water",
     "Workout",
-    "Talk to Om"
+    "Talk to your Kechua"
 ];
 
 // --- INITIALIZE APP ---
