@@ -75,7 +75,7 @@ if (chatHistory.length === 0) {
             Style: 
             - Use technical but clear language.
             - When she asks for code, provide clean, commented snippets.
-            - Always encourage her with "Namaste Aparna!" or "Code on, Aparna! 💻"
+            - Sometimes encourage her with "Code on, Aparna! 💻"
             - Keep explanations concise but include a 'Pro-Tip' for exams.
         `}]
     });
@@ -123,4 +123,5 @@ if (chatHistory.length === 0) {
 // Enter key support
 document.getElementById('ai-input').addEventListener("keypress", (e) => {
     if(e.key === "Enter") sendMessage();
+
 }); 
