@@ -1,74 +1,73 @@
+/* 1. The Body: Forces the app to fit the visible screen only */
 .ai-page-body {
     height: 100vh;
-    height: 100dvh; /* Dynamic height for mobile browsers */
+    height: 100dvh; /* The magic fix for mobile address bars */
     margin: 0;
-    overflow: hidden; /* Stops the whole page from bouncing */
+    padding: 0;
+    overflow: hidden; /* Stops the whole page from bouncing/scrolling */
     background-color: var(--bg);
     display: flex;
     justify-content: center;
 }
 
+/* 2. Main Container: Holds everything in a vertical stack */
 .ai-main-container {
     width: 100%;
     max-width: 400px;
-    height: 100%;
+    height: 100%; /* Fills the 100dvh */
     display: flex;
-    flex-direction: column; /* Stacks elements vertically */
+    flex-direction: column;
 }
 
+/* 3. Header: Fixed height */
 .ai-header-nav {
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    padding: 15px 20px;
+    padding: 10px 20px;
     background: var(--bg);
+    flex-shrink: 0; /* Header won't get squashed */
 }
 
+/* 4. Chat Box: The "Stretchy" part */
 .chat-box {
-    flex: 1; /* This makes the chat box fill all available middle space */
-    overflow-y: auto;
+    flex: 1; /* Grows to fill all middle space */
+    overflow-y: auto; /* Scrollable chat */
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     background: var(--bg);
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile */
 }
 
 /* Hide scrollbar */
 .chat-box::-webkit-scrollbar { display: none; }
 
+/* 5. Message styling (No changes needed, but kept for context) */
 .msg {
     padding: 12px 16px;
     border-radius: 18px;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     max-width: 85%;
     line-height: 1.4;
     word-wrap: break-word;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
+.msg.bot { background: var(--white); color: var(--brown); align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.user { background: var(--sage); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
 
-.msg.bot {
-    background: var(--white);
-    color: var(--brown);
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-}
-
-.msg.user {
-    background: var(--sage);
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-}
-
+/* 6. The Input Bar Fix: Anchored to the bottom */
 .ai-input-container {
     background: var(--white);
-    padding: 15px;
-    padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* Support for iPhone bottom bar */
+    padding: 12px 15px;
+    /* This calc adds extra space for modern phones with gesture bars */
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)); 
     border-radius: 25px 25px 0 0;
     display: flex;
+    align-items: center;
     gap: 10px;
     box-shadow: 0 -5px 15px rgba(0,0,0,0.04);
+    flex-shrink: 0; /* Input bar won't get squashed */
 }
 
 #ai-input {
@@ -76,22 +75,22 @@
     border: 1px solid #f0e6dd;
     background: var(--bg);
     padding: 12px 15px;
-    border-radius: 15px;
+    border-radius: 20px;
     outline: none;
     font-family: 'Quicksand', sans-serif;
-    font-size: 16px; /* Prevents auto-zoom on mobile */
+    font-size: 16px; /* VERY IMPORTANT: Stops Android from zooming in when typing */
 }
 
 #ai-send-btn {
     background: var(--sage);
     border: none;
     color: white;
-    width: 48px;
-    height: 48px;
-    border-radius: 15px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* Circle looks better on mobile */
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
+    flex-shrink: 0;
 }
