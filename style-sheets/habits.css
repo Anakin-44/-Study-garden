@@ -1,0 +1,62 @@
+.habit-page { background: var(--bg); padding: 20px; }
+
+.habit-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#habit-selector {
+    flex: 1;
+    padding: 10px;
+    border-radius: 12px;
+    border: 2px solid #f0e6dd;
+    font-family: 'Quicksand';
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 days a week */
+    gap: 10px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+}
+
+.day-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #f8f1e9;
+    font-size: 0.8rem;
+    color: var(--brown);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.day-cell.completed {
+    background: var(--sage);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(127, 176, 105, 0.3);
+}
+
+.stats-footer {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.stat-box span { font-size: 1.5rem; font-weight: 700; color: var(--sage); }
+.stat-box p { font-size: 0.7rem; color: var(--brown); }
