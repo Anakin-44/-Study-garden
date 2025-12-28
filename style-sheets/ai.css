@@ -1,0 +1,97 @@
+.ai-page-body {
+    height: 100vh;
+    height: 100dvh; /* Dynamic height for mobile browsers */
+    margin: 0;
+    overflow: hidden; /* Stops the whole page from bouncing */
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+}
+
+.ai-main-container {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column; /* Stacks elements vertically */
+}
+
+.ai-header-nav {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 20px;
+    background: var(--bg);
+}
+
+.chat-box {
+    flex: 1; /* This makes the chat box fill all available middle space */
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--bg);
+}
+
+/* Hide scrollbar */
+.chat-box::-webkit-scrollbar { display: none; }
+
+.msg {
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 0.9rem;
+    max-width: 85%;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.msg.bot {
+    background: var(--white);
+    color: var(--brown);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.msg.user {
+    background: var(--sage);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.ai-input-container {
+    background: var(--white);
+    padding: 15px;
+    padding-bottom: calc(15px + env(safe-area-inset-bottom)); /* Support for iPhone bottom bar */
+    border-radius: 25px 25px 0 0;
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.04);
+}
+
+#ai-input {
+    flex: 1;
+    border: 1px solid #f0e6dd;
+    background: var(--bg);
+    padding: 12px 15px;
+    border-radius: 15px;
+    outline: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px; /* Prevents auto-zoom on mobile */
+}
+
+#ai-send-btn {
+    background: var(--sage);
+    border: none;
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
