@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Habit Calendar | StudyFlow</title>
+    <link rel="stylesheet" href="style-sheets/dashboard.css">
+    <link rel="stylesheet" href="style-sheets/habits.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body class="habit-page">
+    <div class="dashboard-wrapper">
+        <header style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+            <div onclick="window.location.href='dashboard.html'" style="cursor: pointer; color: var(--sage); font-weight: bold; font-size: 1.2rem;">←</div>
+            <h2 id="month-name" style="color: var(--brown);">December 2025</h2>
+        </header>
+
+        <section class="habit-selection">
+            <select id="habit-selector" onchange="loadCalendar()">
+                </select>
+            <button onclick="createNewHabit()">+ New</button>
+        </section>
+
+        <div class="calendar-grid" id="calendar-grid">
+            </div>
+
+        <div class="stats-footer">
+            <div class="stat-box">
+                <span id="month-total">0</span>
+                <p>Days This Month</p>
+            </div>
+            <div class="stat-box">
+                <span id="current-streak">0</span>
+                <p>Current Streak</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/habit-logic.js"></script>
+</body>
+</html>
