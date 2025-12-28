@@ -9,6 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="snow-container">
+    <div class="snowflake l">❄</div><div class="snowflake l">❅</div>
+    <div class="snowflake l">❆</div><div class="snowflake l">❄</div>
+    <div class="snowflake m">❄</div><div class="snowflake m">❅</div>
+    <div class="snowflake m">❆</div><div class="snowflake m">❄</div>
+    <div class="snowflake m">❅</div><div class="snowflake m">❆</div>
+    <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+    <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+    <div class="snowflake s">❅</div><div class="snowflake s">❆</div>
+    <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+    <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+</div>
     
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
@@ -16,6 +28,9 @@
             <span class="close-sidebar" onclick="toggleSidebar()">×</span>
         </div>
         <nav class="sidebar-links">
+            <a href="habits.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none; color: #4a4a4a; font-weight: 700; margin-bottom: 25px;">
+                <span>📅</span> Habit Tracker
+            </a>
             <a href="syllabus.html">
                 <span class="icon">📖</span> Syllabus 
                 <span class="side-badge" id="side-syllabus-stat">0%</span>
@@ -51,6 +66,8 @@
     </div>
     <span class="munni-arrow">→</span>
 </section>
+
+    
         <section class="plant-header">
             <div class="plant-video-container">
                 <video id="plant-video" muted playsinline>
@@ -86,6 +103,7 @@
     <a href="notes.html" class="fab">
         <span class="fab-icon">📝</span>
     </a>
+    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="js/dashboard.js"></script>
     <script>
