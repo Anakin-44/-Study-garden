@@ -223,7 +223,7 @@ function updateSidebarBadge(progress) {
 let dialogueIndex = 0;
 const pikuDialogues = [
     "Hello Aparna! I'm Piku! 🌸",
-    "Umm... Om sent me for you so that whenever you get bored you can play with me",
+    "(~kitni sundar hai🌝!! ahem)...uhh om ne meko bheka hai. mai apke sath games khelunga",
     "i really love to play",
     "umm...ok let me ask a riddle"
 ];
@@ -305,4 +305,5 @@ function closePikuTalk() {
     // Optional: Stop the Piku modal image from wobbling if it was talking
     const pikuModalImg = document.getElementById('piku-sprite-modal');
     pikuModalImg.classList.remove('piku-talking');
+
 }
