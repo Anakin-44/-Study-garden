@@ -220,3 +220,89 @@ function updateSidebarBadge(progress) {
     if(sideBadge) sideBadge.innerText = progress + "%";
 }
 
+let dialogueIndex = 0;
+const pikuDialogues = [
+    "Hello Aparna! I'm Piku! 🌸",
+    "Umm... Om sent me for you so that whenever you get bored you can play with me",
+    "i really love to play",
+    "umm...ok let me ask a riddle"
+];
+
+function startPikuTalk() {
+    const isUnlocked = localStorage.getItem('pikuUnlocked');
+    const modal = document.getElementById('puzzle-overlay');
+    const pikuText = document.getElementById('piku-text');
+    const puzzleArea = document.getElementById('puzzle-area');
+    const footer = document.getElementById('dialogue-footer');
+
+    modal.style.display = 'flex';
+
+    if (isUnlocked === 'true') {
+        // --- RETURNING USER FLOW ---
+        // Hide the riddle area entirely
+        puzzleArea.style.display = 'none';
+        
+        // Piku's greeting
+        pikuText.innerText = "Welcome back, Aparna! 🐢 Piku was waiting for you. Ready to relax and play some games?";
+        
+        // Show the "Continue" button
+        footer.innerHTML = `<button onclick="window.location.href='surprise.html'" class="piku-btn">Let's Play! 🎮</button>`;
+    } else {
+        // --- NEW USER FLOW (First time) ---
+        // Run your original dialogue/riddle logic
+        typeNextDialogue(); 
+    }
+}
+
+function typeNextDialogue() {
+    const textElement = document.getElementById('piku-text');
+    const pikuModalImg = document.getElementById('piku-sprite-modal');
+    
+    if (dialogueIndex < pikuDialogues.length) {
+        // Add talking animation
+        pikuModalImg.classList.add('piku-talking');
+        textElement.innerText = pikuDialogues[dialogueIndex];
+        
+        dialogueIndex++;
+
+        // Stop talking animation after a short delay
+        setTimeout(() => {
+            pikuModalImg.classList.remove('piku-talking');
+        }, 1200);
+
+        // If it's the last dialogue line
+        if (dialogueIndex === pikuDialogues.length) {
+            document.getElementById('next-diag-btn').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('puzzle-area').style.display = 'block';
+            }, 1000);
+        }
+    }
+}
+
+function checkPuzzle() {
+    const answer = document.getElementById('puzzle-input').value.toLowerCase().trim();
+    
+    if (answer === "bottle" || answer === "a bottle") {
+        localStorage.setItem('pikuUnlocked', 'true'); // Save the progress!
+        
+        confetti(); 
+        
+        document.getElementById('piku-text').innerText = "Yay! You got it! You're so smart. Piku is happy to have you here. ✨";
+        document.getElementById('puzzle-area').style.display = 'none';
+        
+        const footer = document.getElementById('dialogue-footer');
+        footer.innerHTML = `<button onclick="window.location.href='surprise.html'" class="piku-btn">Continue to Games →</button>`;
+    } else {
+        alert("Piku says: That's not it! Try again, Aparna! 🤔");
+    }
+}
+
+function closePikuTalk() {
+    const modal = document.getElementById('puzzle-overlay');
+    modal.style.display = 'none';
+    
+    // Optional: Stop the Piku modal image from wobbling if it was talking
+    const pikuModalImg = document.getElementById('piku-sprite-modal');
+    pikuModalImg.classList.remove('piku-talking');
+}

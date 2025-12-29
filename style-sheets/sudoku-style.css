@@ -1,0 +1,114 @@
+.sudoku-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 42px); /* Slightly wider to account for borders */
+    grid-template-rows: repeat(9, 42px);
+    background: #4a3728; /* The "Grid" color */
+    border: 4px solid #4a3728;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(74, 55, 40, 0.15);
+    overflow: hidden;
+}
+
+.sudoku-cell {
+    width: 42px;
+    height: 42px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    border: 0.5px solid #eee; /* Thin inner lines */
+    background: white;
+    color: #4a3728;
+    outline: none;
+    transition: all 0.2s;
+}
+
+/* --- THE FIX: Thick Borders for 3x3 Blocks --- */
+/* Add right border to every 3rd column */
+.sudoku-cell:nth-child(3n) {
+    border-right: 3px solid #4a3728;
+}
+/* Add bottom border to every 3rd row */
+.sudoku-cell:nth-child(n+19):nth-child(-n+27),
+.sudoku-cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 3px solid #4a3728;
+}
+/* Remove last right border to keep it clean */
+.sudoku-cell:nth-child(9n) {
+    border-right: none;
+}
+
+/* Focus state: Highlights the box she is working on */
+.sudoku-cell:focus {
+    background: #fff9f2;
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: inset 0 0 0 2px #7fb069;
+    color: #7fb069;
+}
+
+.alt-block {
+    background: #fdfaf6; /* Very subtle tint */
+}
+
+.fixed {
+    background: #f4f4f4;
+    color: #b0a49b !important; /* Muted color for pre-filled numbers */
+    cursor: not-allowed;
+}
+
+.controls {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+/* Reusing your piku-btn style for consistency */
+.game-btn {
+    padding: 12px 25px;
+    border-radius: 50px;
+    border: none;
+    background: #7fb069;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 0 #6a9658;
+}
+
+.game-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #6a9658;
+}
+
+.solve {
+    background: #a47e65;
+    box-shadow: 0 4px 0 #8d6e63;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 450px) {
+    .sudoku-board {
+        grid-template-columns: repeat(9, 35px);
+        grid-template-rows: repeat(9, 35px);
+        border-width: 3px;
+    }
+    .sudoku-cell {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}

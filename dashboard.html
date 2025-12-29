@@ -10,17 +10,17 @@
 </head>
 <body>
     <div class="snow-container">
-    <div class="snowflake l">❄</div><div class="snowflake l">❅</div>
-    <div class="snowflake l">❆</div><div class="snowflake l">❄</div>
-    <div class="snowflake m">❄</div><div class="snowflake m">❅</div>
-    <div class="snowflake m">❆</div><div class="snowflake m">❄</div>
-    <div class="snowflake m">❅</div><div class="snowflake m">❆</div>
-    <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
-    <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
-    <div class="snowflake s">❅</div><div class="snowflake s">❆</div>
-    <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
-    <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
-</div>
+        <div class="snowflake l">❄</div><div class="snowflake l">❅</div>
+        <div class="snowflake l">❆</div><div class="snowflake l">❄</div>
+        <div class="snowflake m">❄</div><div class="snowflake m">❅</div>
+        <div class="snowflake m">❆</div><div class="snowflake m">❄</div>
+        <div class="snowflake m">❅</div><div class="snowflake m">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+        <div class="snowflake s">❅</div><div class="snowflake s">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+    </div>
     
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
@@ -58,22 +58,29 @@
                 <span id="current-time">00:00 AM</span>
             </div>
         </div>
-            <section class="munni-card" onclick="window.location.href='ai.html'">
-    <div class="munni-avatar">🤖</div>
-    <div class="munni-info">
-        <h3>Chat with Munni</h3>
-        <p>Your MCA Mentor is online ✨</p>
+        
+        <section class="munni-card" onclick="window.location.href='ai.html'">
+            <div class="munni-avatar">
+        <img src="assets/munni.png" alt="Munni" class="munni-img">
     </div>
-    <span class="munni-arrow">→</span>
-</section>
+            <div class="munni-info">
+                <h3>Chat with Munni</h3>
+                <p>Your MCA Mentor is online ✨</p>
+            </div>
+            <span class="munni-arrow">→</span>
+        </section>
 
-    
         <section class="plant-header">
-            <div class="plant-video-container">
+            <div class="plant-video-container" style="position: relative;">
                 <video id="plant-video" muted playsinline>
                     <source src="assets/new.mp4" type="video/mp4">
                 </video>
+                
+                <div id="piku-container" class="piku-mini-wrap" onclick="startPikuTalk()">
+                    <img src="assets/piku.png" alt="Piku" class="piku-img-bounce">
+                </div>
             </div>
+
             <div class="bar-container">
                 <div id="progress-fill" class="progress-fill"></div>
             </div>
@@ -91,6 +98,32 @@
         </section>
     </div>
 
+    <div id="puzzle-overlay" class="surprise-modal">
+    <div class="surprise-content" style="border: 3px solid #7fb069; border-radius: 25px; padding: 30px; position: relative;">
+        
+        <span class="close-piku" onclick="closePikuTalk()">×</span>
+
+        <div class="piku-talking-head">
+            <img src="assets/piku.png" id="piku-sprite-modal" class="piku-img-bounce" style="width: 100px;">
+        </div>
+        
+        <p id="piku-text" style="font-weight: bold; color: #a47e65; margin: 20px 0; font-size: 1.1rem; line-height: 1.4;"></p>
+        
+        <div id="dialogue-footer">
+            <button id="next-diag-btn" onclick="typeNextDialogue()" class="piku-btn">Next →</button>
+        </div>
+
+        <div id="puzzle-area" style="display: none;">
+            <p style="font-size: 0.95rem; font-style: italic; margin-bottom: 15px; background: #f0f7f0; padding: 10px; border-radius: 10px;">
+                "I have a neck but no head, and I wear a cap but have no hair. What am I?"
+            </p>
+            <input type="text" id="puzzle-input" placeholder="Answer here..." style="width: 85%; padding: 12px; border-radius: 12px; border: 2px solid #7fb069; margin-bottom: 15px; outline: none; font-family: 'Quicksand';">
+            <br>
+            <button onclick="checkPuzzle()" class="piku-btn unlock-btn" style="width: 100%; padding: 12px;">Unlock Surprise 🗝️</button>
+        </div>
+    </div>
+</div>
+
     <div id="surprise-jar" class="surprise-jar" onclick="showSurprise()">💌</div>
 
     <div id="surprise-overlay" class="surprise-modal" onclick="closeSurprise()">
@@ -106,14 +139,5 @@
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="js/dashboard.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker: Registered'))
-                    .catch(err => console.log('Service Worker: Error', err));
-            });
-        }
-    </script>
-    </body>
+</body>
 </html>

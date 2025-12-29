@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piku's Memory Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-sheets/surprise-style.css">
+    <link rel="stylesheet" href="style-sheets/memory-style.css">
+</head>
+<body>
+
+    <header class="arcade-header">
+        <h1>Memory Match <img src="assets/piku.png" alt="Piku" class="header-piku"></h1>
+        <p>Find all the pairs to clear the board!</p>
+    </header>
+
+    <div class="game-stats">
+        <span>Moves: <b id="moves">0</b></span>
+        <span>Time: <b id="timer">0s</b></span>
+    </div>
+
+    <div class="memory-board" id="game-board">
+        </div>
+
+    <div class="controls">
+        <button class="game-btn" onclick="startGame()">Restart Game</button>
+    </div>
+
+    <a href="surprise.html" class="back-link-style">← Back to Arcade</a>
+
+    <script>
+        const board = document.getElementById('game-board');
+        const movesDisplay = document.getElementById('moves');
+        const timerDisplay = document.getElementById('timer');
+        
+        // Emojis for the cards - you can customize these!
+        const items = ['🌸', '🍦', '🍕', '🧸', '📚', '⭐', '🍓', '🎁'];
+        let cards = [...items, ...items];
+        let flippedCards = [];
+        let matchedCount = 0;
+        let moves = 0;
+        let timer = 0;
+        let interval;
+
+        function startGame() {
+            // Reset variables
+            board.innerHTML = '';
+            flippedCards = [];
+            matchedCount = 0;
+            moves = 0;
+            timer = 0;
+            movesDisplay.innerText = moves;
+            timerDisplay.innerText = timer + 's';
+            clearInterval(interval);
+            
+            // Shuffle cards
+            cards.sort(() => Math.random() - 0.5);
+
+            // Create cards
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.onclick = () => flipCard(card);
+                board.appendChild(card);
+            });
+
+            // Start timer on first move (logic inside flipCard)
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length < 2 && !card.classList.contains('flipped') && !card.classList.contains('matched')) {
+                // Start timer on first flip
+                if (moves === 0 && flippedCards.length === 0) {
+                    interval = setInterval(() => {
+                        timer++;
+                        timerDisplay.innerText = timer + 's';
+                    }, 1000);
+                }
+
+                card.classList.add('flipped');
+                card.innerText = card.dataset.emoji;
+                flippedCards.push(card);
+
+                if (flippedCards.length === 2) {
+                    moves++;
+                    movesDisplay.innerText = moves;
+                    checkMatch();
+                }
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.emoji === card2.dataset.emoji) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedCount += 2;
+                flippedCards = [];
+                if (matchedCount === cards.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        alert(`Aparna! You found them all in ${moves} moves! Piku is so impressed. 🐢💖`);
+                    }, 500);
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    card1.innerText = '';
+                    card2.innerText = '';
+                    flippedCards = [];
+                }, 800);
+            }
+        }
+
+        startGame();
+    </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-const cacheName = 'aparna-garden-v10';
+const cacheName = 'aparna-garden-v11';
 const assets = [
   './',
   './index.html',
@@ -10,7 +10,11 @@ const assets = [
   './test.html',
   './ai.html',
   './habits.html',
+  './surprise.html',
+  './game-memory.html',
+  './game-sudoku.html',
   './manifest.json',
+  
   // JavaScript folder
   './js/auth.js',
   './js/dashboard.js',
@@ -20,6 +24,7 @@ const assets = [
   './js/syllabus-script.js',
   './js/ai-logic.js',
   './js/habit-logic.js',
+  
   // Stylesheets folder
   './style-sheets/auth.css',
   './style-sheets/dashboard.css',
@@ -28,8 +33,14 @@ const assets = [
   './style-sheets/syllabus.css',
   './style-sheets/ai.css',
   './style-sheets/habits.css',
+  './style-sheets/surprise-style.css',
+  './style-sheets/memory-style.css',
+  './style-sheets/sudoku-style.css',
+  
   // Assets folder
   './assets/icon.png',
+  './assets/munni.png',
+  './assets/piku.png',
   './assets/new.mp4',
   './assets/pop.mp3'
 ];
@@ -63,9 +74,4 @@ self.addEventListener('fetch', e => {
       return cacheRes || fetch(e.request);
     })
   );
-
 });
-
-
-
-

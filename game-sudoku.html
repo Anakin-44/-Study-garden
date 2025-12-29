@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piku's Sudoku</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-sheets/surprise-style.css">
+    <link rel="stylesheet" href="style-sheets/sudoku-style.css">
+</head>
+<body>
+
+    <header class="arcade-header">
+        <h1>Sudoku Challenge <img src="assets/piku.png" alt="Piku" class="header-piku"></h1>
+        <p>A little brain workout for my favorite MCA topper.</p>
+    </header>
+
+    <div class="sudoku-container">
+        <div id="sudoku-board" class="sudoku-board"></div>
+        
+        <div class="controls">
+            <button class="game-btn" onclick="generateNewGame()">New Game</button>
+            <button class="game-btn solve" onclick="solveGame()">I Give Up!</button>
+        </div>
+    </div>
+
+    <a href="surprise.html" class="back-link-style">← Back to Arcade</a>
+
+    <script>
+        const boardElement = document.getElementById('sudoku-board');
+        let solution = [];
+
+        // Simple Sudoku Generator (Shuffled base)
+        function generateNewGame() {
+            boardElement.innerHTML = '';
+            const base = [
+                [5,3,4,6,7,8,9,1,2],
+                [6,7,2,1,9,5,3,4,8],
+                [1,9,8,3,4,2,5,6,7],
+                [8,5,9,7,6,1,4,2,3],
+                [4,2,6,8,5,3,7,9,1],
+                [7,1,3,9,2,4,8,5,6],
+                [9,6,1,5,3,7,2,8,4],
+                [2,8,7,4,1,9,6,3,5],
+                [3,4,5,2,8,6,1,7,9]
+            ];
+            solution = base; // For this version, we'll use a fixed solution base
+
+            for (let r = 0; r < 9; r++) {
+                for (let c = 0; c < 9; c++) {
+                    const cell = document.createElement('input');
+                    cell.type = 'number';
+                    cell.className = 'sudoku-cell';
+                    if ((Math.floor(r/3) + Math.floor(c/3)) % 2 === 0) cell.classList.add('alt-block');
+                    
+                    // Show roughly 30-40% of the numbers
+                    if (Math.random() > 0.6) {
+                        cell.value = solution[r][c];
+                        cell.readOnly = true;
+                        cell.classList.add('fixed');
+                    }
+
+                    cell.oninput = (e) => validateInput(e.target, r, c);
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+
+        function validateInput(cell, r, c) {
+            const val = parseInt(cell.value);
+            if (val === solution[r][c]) {
+                cell.style.color = "#7fb069"; // Green for correct
+                checkWin();
+            } else {
+                cell.style.color = "#e74c3c"; // Red for wrong
+            }
+        }
+
+        function solveGame() {
+            const cells = document.querySelectorAll('.sudoku-cell');
+            cells.forEach((cell, i) => {
+                const r = Math.floor(i / 9);
+                const c = i % 9;
+                cell.value = solution[r][c];
+                cell.style.color = "#4a3728";
+            });
+            alert("Piku says: It's okay to ask for help sometimes! ❤️");
+        }
+
+        function checkWin() {
+            const cells = Array.from(document.querySelectorAll('.sudoku-cell'));
+            const isFull = cells.every(cell => cell.value != "");
+            if (isFull) alert("Aparna! You're a genius! Piku is proud. 🐢✨");
+        }
+
+        generateNewGame();
+    </script>
+</body>
+</html>
