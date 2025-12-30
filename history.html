@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="style-sheets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: var(--bg); color: #f5f5f5;">
+    <div class="snow-container">
+        <div class="snowflake l">❄</div><div class="snowflake l">❅</div>
+        <div class="snowflake l">❆</div><div class="snowflake l">❄</div>
+        <div class="snowflake m">❄</div><div class="snowflake m">❅</div>
+        <div class="snowflake m">❆</div><div class="snowflake m">❄</div>
+        <div class="snowflake m">❅</div><div class="snowflake m">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+        <div class="snowflake s">❅</div><div class="snowflake s">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+    </div>
     <div class="dashboard-wrapper">
         <header style="text-align: center; margin-bottom: 20px; padding-top: 20px;">
             <a href="dashboard.html" style="text-decoration:none; color:var(--brown); font-weight:bold;">← Back to Garden</a>
-            <h1 style="color:var(--brown); margin-top: 10px;">Garden History 📜</h1>
+            <h1 style="color:var(--sage); margin-top: 10px;">Garden History 📜</h1>
         </header>
 
         <div id="history-list">
@@ -22,31 +34,29 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const historyList = document.getElementById('history-list');
-            // This pulls the logs that dashboard.js saves
             const logs = JSON.parse(localStorage.getItem('study_history')) || [];
 
             if (logs.length === 0) {
                 historyList.innerHTML = `
-                    <div style="text-align:center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                        <p style='color:#888;'>No past blooms yet. <br> Finish your tasks to save a memory! 🌱</p>
+                    <div style="text-align:center; padding: 40px 20px; background: var(--white); border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border: 1px solid #333;">
+                        <p style='color:var(--brown); opacity: 0.8;'>No past blooms yet. <br> Finish your tasks to save a memory! 🌱</p>
                     </div>`;
                 return;
             }
 
-            // Show newest logs first
             logs.reverse().forEach(log => {
                 const item = document.createElement('div');
-                item.style.cssText = "background:white; padding:15px; border-radius:15px; margin-bottom:15px; box-shadow:0 4px 10px rgba(0,0,0,0.05); border-left: 5px solid var(--sage);";
+                // Updated to match dark theme cards
+                item.style.cssText = "background: var(--white); padding:15px; border-radius:15px; margin-bottom:15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border-left: 5px solid var(--sage); border-top: 1px solid rgba(255,255,255,0.05); border-right: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);";
                 
-                // Logic to show a little mini-summary of tasks
-                const taskDots = log.tasks.map(t => t.completed ? '🟢' : '⚪').join(' ');
+                const taskDots = log.tasks.map(t => t.completed ? '🟢' : '⚫').join(' ');
 
                 item.innerHTML = `
                     <div style="display:flex; justify-content:space-between; font-weight:bold; color:var(--brown);">
                         <span>📅 ${log.date}</span>
                         <span style="color:var(--sage)">${log.score}%</span>
                     </div>
-                    <p style="font-size:0.85rem; color:#6d4c41; margin-top:8px; font-weight: 500;">
+                    <p style="font-size:0.85rem; color:#bba08e; margin-top:8px; font-weight: 500;">
                         Growth Record: ${taskDots}
                     </p>
                 `;
@@ -54,5 +64,5 @@
             });
         });
     </script>
-    </body>
+</body>
 </html>

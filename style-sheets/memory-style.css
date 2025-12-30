@@ -4,7 +4,11 @@
     display: flex;
     gap: 30px;
     font-weight: bold;
-    color: #4a3728;
+    color: var(--brown-latte); /* Soft Latte color */
+}
+
+.game-stats b {
+    color: var(--primary-color); /* Glowing Sage */
 }
 
 .memory-board {
@@ -13,36 +17,39 @@
     grid-template-rows: repeat(4, 80px);
     gap: 15px;
     padding: 20px;
-    background: white;
+    background: var(--card-bg); /* Dark Charcoal */
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 .memory-card {
     width: 80px;
     height: 80px;
-    background: #f4cfdf; /* Soft Pink */
+    background: #3a2a35; /* Dark Midnight Rose - card back */
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, border 0.3s;
     user-select: none;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .memory-card.flipped {
-    background: white;
-    border: 2px solid #7fb069;
+    background: #2d312d; /* Slightly lighter charcoal */
+    border: 2px solid var(--primary-color); /* Glowing Sage Border */
     transform: rotateY(180deg);
 }
 
 .memory-card.matched {
-    background: #e8f5e9;
-    border: 2px solid #7fb069;
+    background: #1e211e;
+    border: 2px solid var(--primary-color);
     cursor: default;
     animation: matchScale 0.4s ease;
+    opacity: 0.8;
 }
 
 @keyframes matchScale {
@@ -55,20 +62,27 @@
     margin: 30px 0;
 }
 
+/* Updated Button for Midnight visibility */
 .game-btn {
     padding: 12px 30px;
     border-radius: 50px;
-    border: 2px solid #7fb069;
-    background: white;
-    color: #7fb069;
+    border: none;
+    background: var(--primary-color); /* Sage Green */
+    color: #1a1c1a;                  /* Dark text for visibility */
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 4px 0 #6a9658;
 }
 
 .game-btn:hover {
-    background: #7fb069;
-    color: white;
+    background: #b9e0ad;
+    transform: translateY(-2px);
+}
+
+.game-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 #6a9658;
 }
 
 /* Mobile responsiveness */

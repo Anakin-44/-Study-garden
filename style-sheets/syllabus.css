@@ -1,25 +1,24 @@
 :root {
-    --bg: #fff9f2;
-    --brown: #a47e65;
-    --sage: #7fb069;
-    --white: #ffffff;
-    --text: #4a4a4a;
+    /* Same palette as Dashboard for consistency */
+    --bg: #1a1c1a;        /* Midnight Charcoal */
+    --brown: #d7bba8;     /* Soft Latte Brown */
+    --sage: #a8d59a;      /* Glowing Sage */
+    --white: #252825;     /* Dark Card Background */
+    --text: #f5f5f5;      /* Main light text */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    /* Prevents the rubber-band scrolling and pull-to-refresh */
     overscroll-behavior-y: contain; 
-    /* Prevents the blue highlight when clicking buttons */
     -webkit-tap-highlight-color: transparent;
-    /* Prevents accidental text selection while clicking fast */
     user-select: none;
     background-color: var(--bg);
     font-family: 'Quicksand', sans-serif;
     padding: 20px;
     display: flex;
     justify-content: center;
+    color: var(--text);
 }
 
 .syllabus-wrapper { width: 100%; max-width: 450px; }
@@ -30,13 +29,23 @@ header {
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 25px;
-    box-shadow: 0 4px 15px rgba(164, 126, 101, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     border-top: 6px solid var(--sage);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    color: var(--text);
+}
+
+#stat-text {
+    color: var(--brown);
+    font-weight: 500;
 }
 
 .back-link {
     text-decoration: none;
-    color: white;
+    color: #1a1c1a; /* Dark text on light button */
     background-color: var(--brown);
     padding: 8px 18px;
     border-radius: 12px 4px 12px 4px;
@@ -50,7 +59,7 @@ header {
 .total-progress-bar {
     width: 100%;
     height: 12px;
-    background: #eee;
+    background: #333; /* Darker empty track */
     border-radius: 10px;
     margin: 10px 0;
     overflow: hidden;
@@ -59,23 +68,24 @@ header {
 .fill {
     height: 100%;
     background: var(--sage);
+    box-shadow: 0 0 10px rgba(168, 213, 154, 0.4);
     transition: width 0.5s ease;
 }
 
-/* --- THE ACCORDION HEADERS (The Fix) --- */
+/* --- THE ACCORDION HEADERS --- */
 .subject-section {
     background: var(--white);
     margin-bottom: 12px;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #f0e6dd;
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
 }
 
 summary {
     list-style: none;
     display: flex;
-    justify-content: space-between; /* Pushes content to edges */
-    align-items: center; /* Vertical center */
+    justify-content: space-between; 
+    align-items: center; 
     padding: 15px;
     cursor: pointer;
     user-select: none;
@@ -86,7 +96,7 @@ summary::-webkit-details-marker { display: none; }
 /* Left side: Icon + Name */
 .sub-title {
     font-weight: 700;
-    color: var(--brown);
+    color: var(--brown); /* Soft latte name */
     display: flex;
     align-items: center;
     gap: 8px;
@@ -99,7 +109,8 @@ summary::-webkit-details-marker { display: none; }
     gap: 12px;
 }
 
-#maths-percent, #reasoning-percent, #english-percent, #gk-percent {
+/* Subject percentages */
+[id$="-percent"] {
     font-size: 0.75rem;
     font-weight: 800;
     color: var(--sage);
@@ -110,7 +121,7 @@ summary::-webkit-details-marker { display: none; }
 .mini-bar {
     width: 50px;
     height: 6px;
-    background: #f0f0f0;
+    background: #1a1c1a; /* Dark track for mini bar */
     border-radius: 10px;
     overflow: hidden;
 }
@@ -123,28 +134,18 @@ summary::-webkit-details-marker { display: none; }
 
 /* --- CHAPTER LIST --- */
 .chapter-list {
-    background: #fdfdfd;
-    border-top: 1px solid #f0f0f0;
+    background: #2d312d; /* Slightly different dark for the list area */
+    border-top: 1px solid #333;
 }
 
 .topic-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
-    border-bottom: 1px solid #f9f9f9;
+    padding: 12px 15px;
+    border-bottom: 1px solid #353a35;
     font-size: 0.85rem;
-}
-
-.num-input {
-    width: 50px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    text-align: center;
-    font-family: 'Quicksand';
-    font-weight: bold;
-    color: var(--brown);
+    color: var(--text);
 }
 
 /* Styling for checkboxes */
@@ -153,15 +154,67 @@ summary::-webkit-details-marker { display: none; }
     height: 22px;
     accent-color: var(--sage);
     cursor: pointer;
+    filter: brightness(0.9); /* Makes checkbox look better on dark */
 }
 
 .completed-text {
     text-decoration: line-through;
-    opacity: 0.5;
+    opacity: 0.4;
     color: var(--sage);
 }
 
-/* Adjusting the input to look centered */
-.topic-row {
-    padding: 12px 15px;
+/* Specific Style for Project Lab border in Dark Mode */
+#sec-projects summary {
+    border-left: 5px solid #ff7675; /* Keeping your project accent but it will pop on dark */
 }
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Keep them behind cards (which should be z-index: 2 or higher) */
+    color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(168, 213, 154, 0.5); /* Soft Sage glow to match Piku */
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+/* Ensure the container is visible */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; 
+}
+
+/* Animations for falling and swaying */
+@keyframes snowflakes-fall {
+    0% { top: -10%; }
+    100% { top: 100%; }
+}
+
+@keyframes snowflakes-shake {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(80px); }
+}
+
+/* Varying sizes and speeds */
+.snowflake.l { font-size: 1.5rem; animation-duration: 12s, 3s; opacity: 0.6; }
+.snowflake.m { font-size: 1rem; animation-duration: 8s, 2.5s; opacity: 0.4; }
+.snowflake.s { font-size: 0.6rem; animation-duration: 6s, 2s; opacity: 0.3; }
+
+/* Randomize positions for each flake (Add more if needed) */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s, 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s, 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 0.5s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 1s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }

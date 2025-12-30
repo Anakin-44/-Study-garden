@@ -1,9 +1,10 @@
 :root {
-    --bg: #fff9f2;
-    --sage: #7fb069;
-    --brown: #a47e65;
-    --pink: #f2c6c2;
-    --white: #ffffff;
+    /* Updated Midnight Palette - Using your structure */
+    --bg: #1a1c1a;        /* Midnight Charcoal */
+    --sage: #a8d59a;      /* Glowing Sage */
+    --brown: #d7bba8;     /* Soft Latte Brown */
+    --pink: #5a4044;      /* Deep Berry Pink */
+    --white: #252825;     /* Dark Card Background */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,11 +18,12 @@ body {
     padding: 20px;
     display: flex;
     justify-content: center;
+    color: #f5f5f5; /* Global text color for dark mode */
 }
 
 .dashboard-wrapper { width: 100%; max-width: 400px; display: flex; flex-direction: column; }
 
-/* --- HEADER FIX (Top Left Menu, Top Right Date) --- */
+/* --- HEADER FIX --- */
 .top-header {
     display: flex;
     justify-content: space-between;
@@ -37,7 +39,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
-    z-index: 100; /* Stays below the active sidebar but above content */
+    z-index: 100;
 }
 
 .menu-btn span {
@@ -51,7 +53,12 @@ body {
 #current-time { display: block; font-size: 1.2rem; font-weight: 700; color: var(--sage); }
 
 /* --- PLANT & BAR --- */
-.plant-header { text-align: center; margin-bottom: 25px; }
+/* --- PLANT & BAR FIXES --- */
+.plant-header { 
+    text-align: center; 
+    margin-bottom: 25px; 
+}
+
 .plant-video-container {
     width: 200px;
     height: 200px;
@@ -60,36 +67,42 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: relative; /* Essential for Piku's absolute positioning */
+    border-radius: 50%; /* Keeps the video a circle */
+    background: #000;   /* Prevents white flicker while video loads */
+    border: 3px solid var(--white); /* Subtle frame for the video */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
+
 #plant-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
-.bar-container { background: #e6dfd5; height: 12px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
+.bar-container { background: #333333; height: 12px; border-radius: 10px; overflow: hidden; margin: 10px 0; }
 .progress-fill { height: 100%; width: 0%; background: var(--sage); transition: width 0.5s ease; }
 
 /* --- TO-DO CARD --- */
-.todo-card { background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); position: relative; }
+.todo-card { background: var(--white); padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); position: relative; }
 .washi-tape { width: 80px; height: 20px; background: var(--pink); position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-1deg); }
 .input-area { display: flex; gap: 8px; margin: 15px 0; }
-#task-input { flex: 1; padding: 10px; border: 2px solid #f0e6dd; border-radius: 8px; outline: none; }
-#add-btn { background: var(--sage); color: white; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+#task-input { flex: 1; padding: 10px; border: 2px solid #353a35; border-radius: 8px; outline: none; background: #1a1c1a; color: white; }
+#add-btn { background: var(--sage); color: #1a1c1a; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 .task-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
 .done-text { text-decoration: line-through; opacity: 0.5; }
 
-/* --- SIDEBAR (THE TOPPEST LAYER) --- */
+/* --- SIDEBAR --- */
 .sidebar {
     position: fixed;
     top: 0;
     left: -280px; 
     width: 280px;
     height: 100%;
-    background: white;
-    z-index: 9999; /* Absolute highest */
+    background: #252825; 
+    z-index: 9999;
     transition: 0.3s ease-in-out;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+    box-shadow: 10px 0 30px rgba(0,0,0,0.5);
     padding: 30px 20px;
 }
 
@@ -99,9 +112,9 @@ body {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.7);
     display: none;
-    z-index: 9998; /* Just below the sidebar */
+    z-index: 9998;
     backdrop-filter: blur(3px);
 }
 
@@ -112,7 +125,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 40px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #333;
     padding-bottom: 10px;
 }
 
@@ -120,7 +133,7 @@ body {
 .sidebar-links { display: flex; flex-direction: column; gap: 20px; }
 .sidebar-links a {
     text-decoration: none;
-    color: #4a4a4a;
+    color: var(--brown);
     font-size: 1.1rem;
     font-weight: 600;
     display: flex;
@@ -129,101 +142,63 @@ body {
     border-radius: 10px;
 }
 .sidebar-links .icon { margin-right: 15px; font-size: 1.3rem; }
-.side-badge { margin-left: auto; background: var(--sage); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; }
+.side-badge { margin-left: auto; background: var(--sage); color: #1a1c1a; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; }
 
 /* --- SURPRISE JAR & FAB --- */
 .surprise-jar {
     position: fixed; bottom: 25px; left: 25px;
-    font-size: 30px; cursor: pointer; background: white;
+    font-size: 30px; cursor: pointer; background: #252825;
     width: 60px; height: 60px; display: flex;
     justify-content: center; align-items: center;
-    border-radius: 50%; box-shadow: 0 4px 15px rgba(164, 126, 101, 0.2);
+    border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     z-index: 100;
 }
-.surprise-jar:hover { animation: shake 0.5s infinite; }
 
 .fab {
     position: fixed; bottom: 25px; right: 25px;
     width: 60px; height: 60px; background-color: var(--sage);
     border-radius: 50%; display: flex;
     justify-content: center; align-items: center;
-    text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     z-index: 100;
 }
 
-@keyframes shake {
-  0% { transform: translate(1px, 1px) rotate(0deg); }
-  20% { transform: translate(-3px, 0px) rotate(1deg); }
-  100% { transform: translate(1px, 1px) rotate(0deg); }
-}
-
-/* The full screen dim layer */
+/* --- MODALS --- */
 .surprise-modal {
     display: none; 
     position: fixed;
     top: 0; left: 0; 
     width: 100%; height: 100%;
-    background: rgba(164, 126, 101, 0.4); /* Soft brown tint */
-    backdrop-filter: blur(8px); /* Modern blur effect */
-    z-index: 10000; /* Above the sidebar */
+    background: rgba(0, 0, 0, 0.7); 
+    backdrop-filter: blur(8px);
+    z-index: 10000;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-/* The actual message card */
 .surprise-content {
-    background: #fff;
+    background: #252825;
     padding: 40px 25px;
     border-radius: 30px;
     text-align: center;
     max-width: 320px;
     width: 100%;
     position: relative;
-    /* Paper-like shadow */
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, #ffffff 0%, #fffbf2 100%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* The text styling */
 #surprise-text {
     font-family: 'Quicksand', sans-serif;
-    color: #5d4037; /* Deep warm brown */
+    color: var(--brown);
     font-size: 1.15rem;
     font-weight: 600;
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
-/* Decoration inside the card */
-.surprise-content::before {
-    content: "💌";
-    display: block;
-    font-size: 2rem;
-    margin-bottom: 15px;
-    opacity: 0.8;
-}
-
-/* The close button (Heart) */
-.close-heart {
-    position: absolute;
-    bottom: -60px; /* Moves it below the card */
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    cursor: pointer;
-    background: white;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* Munni AI Card on Dashboard */
+/* --- MUNNI CARD --- */
 .munni-card {
     background: var(--white);
     padding: 15px 20px;
@@ -232,29 +207,190 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     cursor: pointer;
-    border: 1px solid #f0e6dd;
+    border: 1px solid #333;
     transition: transform 0.2s;
 }
 
-.munni-card:active { transform: scale(0.98); }
-
 .munni-avatar {
-    width: 50px;
-    height: 50px;
-    background: var(--bg);
+    width: 55px; 
+    height: 55px;
+    background: #1a1c1a;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    overflow: hidden;
+    border: 2px solid #333;
 }
 
 .munni-info h3 { color: var(--sage); font-size: 1.1rem; }
 .munni-info p { color: var(--brown); font-size: 0.85rem; opacity: 0.8; }
 .munni-arrow { margin-left: auto; color: var(--sage); font-weight: bold; }
 
+
+/* PIKU MODAL FIXES */
+#piku-text { font-weight: bold; color: var(--brown) !important; margin: 20px 0; font-size: 1.1rem; line-height: 1.4; }
+#puzzle-area p { font-size: 0.95rem; font-style: italic; margin-bottom: 15px; background: #1a1c1a; color: white; padding: 10px; border-radius: 10px; }
+#puzzle-input { width: 85%; padding: 12px; border-radius: 12px; border: 2px solid var(--sage); background: #1a1c1a; color: white; margin-bottom: 15px; outline: none; }
+
+/* REMAINING ANIMATIONS AND BOUNCES STAY THE SAME AS YOUR CODE */
+
+@keyframes sideSway { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(30px); } }
+@keyframes pikuBounce { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+@keyframes munniPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+
+/* Piku Positioned on Video */
+.piku-mini-wrap {
+    position: absolute;
+    bottom: 15px; 
+    right: 15px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.piku-img-bounce {
+    width: 65px; /* Your preferred bigger size */
+    height: auto;
+    /* Added a glow so Piku stands out against the dark video */
+    filter: drop-shadow(0 0 8px rgba(168, 213, 154, 0.4)); 
+    animation: pikuBounce 0.8s infinite alternate ease-in-out;
+}
+.munni-img { width: 85%; height: auto; object-fit: contain; animation: munniPulse 4s ease-in-out infinite; }
+
+.piku-btn {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #1a1c1a !important; 
+    background: var(--sage); 
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #6a9658;
+}
+
+/* --- PIKU MODAL CLOSE BUTTON --- */
+.close-piku {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--brown); /* Changed from dark brown to soft latte */
+    cursor: pointer;
+    line-height: 1;
+    transition: 0.2s;
+    z-index: 101; /* Ensures it stays above the Piku head */
+}
+
+.close-piku:hover {
+    color: var(--sage); /* Turns glowing sage on hover */
+    transform: scale(1.2);
+}
+
+/* --- SURPRISE CONTENT (PIKU MODAL) --- */
+.surprise-content {
+    background: var(--white); /* This is your #252825 */
+    padding: 40px 25px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    /* Soft border so the card doesn't disappear into the black overlay */
+    border: 3px solid var(--sage) !important; 
+}
+
+/* Fix for the Riddle Area inside the modal */
+#puzzle-area p {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-bottom: 15px;
+    background: #1a1c1a !important; /* Darker box for the text */
+    color: var(--text-main) !important;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+#puzzle-input {
+    width: 85%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid var(--sage);
+    background: #1a1c1a;
+    color: white;
+    margin-bottom: 15px;
+    outline: none;
+    font-family: 'Quicksand';
+}
+
+.sidebar-munni {
+    margin: 10px 15px 25px 15px;
+    background: rgba(168, 213, 154, 0.1); /* Very subtle Sage glow */
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    border: 1px solid rgba(168, 213, 154, 0.2);
+    transition: all 0.3s ease;
+}
+
+.sidebar-munni:hover {
+    background: rgba(168, 213, 154, 0.2);
+    transform: translateY(-2px);
+}
+
+.munni-avatar-mini {
+    width: 45px;
+    height: 45px;
+    background: var(--card-bg);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--sage);
+    flex-shrink: 0;
+}
+
+.munni-avatar-mini img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.munni-text-mini h4 {
+    margin: 0;
+    color: var(--sage);
+    font-size: 0.95rem;
+}
+
+.munni-text-mini p {
+    margin: 0;
+    color: var(--brown-latte);
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Keep them behind cards (which should be z-index: 2 or higher) */
+    color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(168, 213, 154, 0.5); /* Soft Sage glow to match Piku */
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+/* Ensure the container is visible */
 .snow-container {
     position: fixed;
     top: 0;
@@ -262,204 +398,33 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 9999;
-    overflow: hidden;
+    z-index: 1; 
 }
 
-.snowflake {
-    position: absolute;
-    top: -10%;
-    color: pink;
-    user-select: none;
-    animation-name: snowfall, sideSway;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear, ease-in-out;
-}
-
-/* Three different sizes for density/depth */
-.snowflake.l { font-size: 1.5rem; opacity: 0.9; filter: blur(1px); }
-.snowflake.m { font-size: 1rem; opacity: 0.6; filter: blur(2px); }
-.snowflake.s { font-size: 0.5rem; opacity: 0.3; filter: blur(3px); }
-
-@keyframes snowfall {
+/* Animations for falling and swaying */
+@keyframes snowflakes-fall {
     0% { top: -10%; }
-    100% { top: 110%; }
+    100% { top: 100%; }
 }
 
-@keyframes sideSway {
+@keyframes snowflakes-shake {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(30px); }
+    50% { transform: translateX(80px); }
 }
 
-/* Randomized positions and speeds for 20 flakes */
-.snowflake:nth-child(1) { left: 5%; animation-duration: 8s, 3s; }
-.snowflake:nth-child(2) { left: 15%; animation-duration: 12s, 4s; animation-delay: 1s; }
-.snowflake:nth-child(3) { left: 25%; animation-duration: 10s, 2s; animation-delay: 2s; }
-.snowflake:nth-child(4) { left: 35%; animation-duration: 15s, 5s; }
-.snowflake:nth-child(5) { left: 45%; animation-duration: 11s, 3s; animation-delay: 3s; }
-.snowflake:nth-child(6) { left: 55%; animation-duration: 9s, 4s; animation-delay: 1s; }
-.snowflake:nth-child(7) { left: 65%; animation-duration: 13s, 3s; animation-delay: 2s; }
-.snowflake:nth-child(8) { left: 75%; animation-duration: 14s, 5s; animation-delay: 4s; }
-.snowflake:nth-child(9) { left: 85%; animation-duration: 10s, 2s; }
-.snowflake:nth-child(10) { left: 95%; animation-duration: 11s, 4s; animation-delay: 2s; }
-.snowflake:nth-child(11) { left: 10%; animation-duration: 14s, 3s; animation-delay: 5s; }
-.snowflake:nth-child(12) { left: 20%; animation-duration: 9s, 4s; animation-delay: 3s; }
-.snowflake:nth-child(13) { left: 30%; animation-duration: 16s, 2s; animation-delay: 1s; }
-.snowflake:nth-child(14) { left: 40%; animation-duration: 7s, 5s; animation-delay: 6s; }
-.snowflake:nth-child(15) { left: 50%; animation-duration: 12s, 3s; animation-delay: 2s; }
-.snowflake:nth-child(16) { left: 60%; animation-duration: 10s, 4s; animation-delay: 4s; }
-.snowflake:nth-child(17) { left: 70%; animation-duration: 15s, 3s; animation-delay: 1s; }
-.snowflake:nth-child(18) { left: 80%; animation-duration: 8s, 5s; animation-delay: 2s; }
-.snowflake:nth-child(19) { left: 90%; animation-duration: 13s, 2s; animation-delay: 3s; }
-.snowflake:nth-child(20) { left: 100%; animation-duration: 11s, 4s; animation-delay: 5s; }
+/* Varying sizes and speeds */
+.snowflake.l { font-size: 1.5rem; animation-duration: 12s, 3s; opacity: 0.6; }
+.snowflake.m { font-size: 1rem; animation-duration: 8s, 2.5s; opacity: 0.4; }
+.snowflake.s { font-size: 0.6rem; animation-duration: 6s, 2s; opacity: 0.3; }
 
-/* Piku Positioned on Video (Now Bigger) */
-.piku-mini-wrap {
-    position: absolute;
-    bottom: 15px; /* Moved slightly up to account for size */
-    right: 15px;
-    cursor: pointer;
-    z-index: 100;
-}
+/* Randomize positions for each flake (Add more if needed) */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s, 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s, 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 0.5s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 1s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
 
-.piku-img-bounce {
-    width: 65px; /* Increased from 45px to 65px */
-    height: auto;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-    animation: pikuBounce 0.8s infinite alternate ease-in-out;
-}
-
-/* Piku inside the Modal (Now Bigger) */
-#piku-sprite-modal {
-    width: 100px !important; /* Increased from 60px to 100px */
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* Updated Bounce for the bigger Piku */
-@keyframes pikuBounce {
-    from { transform: translateY(0); }
-    to { transform: translateY(-12px); } /* Bounces slightly higher */
-}
-
-/* The Wiggle/Talking Animation */
-.piku-talking {
-    animation: pikuWobble 0.2s infinite;
-}
-
-@keyframes pikuWobble {
-    0% { transform: rotate(-5deg) scale(1.05); }
-    50% { transform: rotate(5deg) scale(1.1); } /* Added a slight scale-up when talking */
-    100% { transform: rotate(-5deg) scale(1.05); }
-}
-
-.close-piku {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    color: #a47e65;
-    cursor: pointer;
-    line-height: 1;
-    transition: 0.2s;
-}
-
-.close-piku:hover {
-    color: #7fb069;
-    transform: scale(1.2);
-}
-
-/* Update this in dashboard.css */
-
-.piku-btn {
-    font-family: 'Quicksand', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: white !important; /* Forces text to be white */
-    background: #7fb069; /* Your Sage Green */
-    border: none;
-    padding: 12px 28px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    outline: none;
-    display: inline-block;
-    text-align: center;
-    box-shadow: 0 5px 0 #6a9658; /* 3D Shadow effect */
-    text-decoration: none;
-}
-
-.piku-btn:hover {
-    background: #8bc371;
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 #6a9658;
-}
-
-.piku-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #6a9658;
-}
-
-/* Specific Style for the 'Next' Button (Sage Theme) */
-#next-diag-btn {
-    background: var(--sage);
-    box-shadow: 0 5px 0 #6a9658; /* Darker green shadow for 3D look */
-}
-
-#next-diag-btn:hover {
-    background: #8bc371; /* Slightly lighter on hover */
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 #6a9658;
-}
-
-#next-diag-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #6a9658; /* Looks pressed down */
-}
-
-/* Specific Style for the 'Unlock' Button (Brown Theme) */
-.unlock-btn {
-    background: var(--brown);
-    box-shadow: 0 5px 0 #8d6e63; /* Darker brown shadow */
-    width: 100%; /* Makes it a primary action button */
-    margin-top: 15px;
-}
-
-.unlock-btn:hover {
-    background: #b58d73;
-    transform: translateY(-2px);
-    box-shadow: 0 7px 0 #8d6e63;
-}
-
-.unlock-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 2px 0 #8d6e63;
-}
-
-/* Update/Add these in dashboard.css */
-
-.munni-avatar {
-    width: 55px; /* Slightly bigger to accommodate the image */
-    height: 55px;
-    background: var(--bg);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Ensures the image stays in the circle */
-    border: 2px solid #f0e6dd;
-}
-
-.munni-img {
-    width: 85%; /* Adjust this based on your image padding */
-    height: auto;
-    object-fit: contain;
-    /* Give Munni a subtle breathing animation */
-    animation: munniPulse 4s ease-in-out infinite;
-}
-
-@keyframes munniPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-}

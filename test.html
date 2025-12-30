@@ -8,54 +8,132 @@
     <link rel="stylesheet" href="style-sheets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
+        /* Midnight Garden Test Theme */
+        body {
+            background-color: var(--bg); /* Midnight Charcoal from dashboard.css */
+            color: var(--text-main);
+        }
+
         .test-container { max-width: 400px; width: 90%; margin: 20px auto; }
+        
+        #selection-screen { 
+            text-align: center; 
+            background: var(--white); /* Dark Card Background #252825 */
+            padding: 30px 20px; 
+            border-radius: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
         .timer-header { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            background: white; 
+            background: var(--white); 
             padding: 15px; 
             border-radius: 15px; 
             margin-bottom: 20px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
             position: sticky; 
             top: 10px; 
-            z-index: 100; 
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.05);
         }
-        .timer { color: #e74c3c; font-weight: 700; font-size: 1.2rem; }
-        .q-card { background: white; padding: 25px; border-radius: 20px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .option { display: block; padding: 12px; border: 2px solid #f0e6dd; border-radius: 10px; margin-top: 10px; cursor: pointer; transition: 0.3s; }
-        .option input { display: none; }
-        .option:has(input:checked) { border-color: var(--sage); background: #fafff5; }
-        .submit-btn { width: 100%; background: var(--sage); color: white; border: none; padding: 15px; border-radius: 15px; font-weight: 700; font-size: 1rem; cursor: pointer; }
-        
-        #selection-screen { 
-            text-align: center; 
-            background: white; 
-            padding: 30px 20px; 
-            border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+
+        .timer { color: #ff7675; font-weight: 700; font-size: 1.2rem; } /* Brighter red for dark mode */
+
+        .q-card { 
+            background: var(--white); 
+            padding: 25px; 
+            border-radius: 20px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+            border: 1px solid rgba(255,255,255,0.05);
+            color: #f5f5f5;
         }
-        
+
+        .option { 
+            display: block; 
+            padding: 12px; 
+            border: 2px solid #353a35; 
+            border-radius: 10px; 
+            margin-top: 10px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            background: #1a1c1a;
+            color: var(--brown);
+        }
+
+        .option:has(input:checked) { 
+            border-color: var(--sage); 
+            background: rgba(168, 213, 154, 0.1); 
+            color: var(--sage);
+        }
+
+        .submit-btn { 
+            width: 100%; 
+            background: var(--sage); 
+            color: #1a1c1a; 
+            border: none; 
+            padding: 15px; 
+            border-radius: 15px; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            box-shadow: 0 4px 0 #6a9658;
+        }
+
+        .submit-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #6a9658; }
+
         select { 
             width: 100%; 
             padding: 12px; 
             margin: 10px 0; 
             border-radius: 10px; 
-            border: 2px solid #f0e6dd; 
+            border: 2px solid #353a35; 
             font-family: 'Quicksand'; 
             outline: none; 
-            background: #fff;
+            background: #1a1c1a;
+            color: white;
         }
 
         /* Modal Review Styling */
-        .surprise-content { max-height: 85vh; overflow-y: auto; width: 90%; max-width: 350px; }
-        .review-item { text-align: left; padding: 15px; border-radius: 12px; margin-top: 15px; border: 1px solid #eee; }
-        .correct-bg { background: #f0fff4; border-color: #c6f6d5; }
-        .wrong-bg { background: #fff5f5; border-color: #fed7d7; }
+        .surprise-content { 
+            max-height: 85vh; 
+            overflow-y: auto; 
+            width: 90%; 
+            max-width: 350px; 
+            background: var(--white) !important;
+            border: 2px solid var(--sage);
+        }
+
+        .review-item { 
+            text-align: left; 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-top: 15px; 
+            border: 1px solid #333; 
+            background: #1a1c1a;
+        }
+
+        .correct-bg { background: rgba(72, 187, 120, 0.1) !important; border-color: #48bb78 !important; color: #9ae6b4; }
+        .wrong-bg { background: rgba(245, 101, 101, 0.1) !important; border-color: #f56565 !important; color: #feb2b2; }
+        
     </style>
 </head>
 <body>
+    <div class="snow-container">
+        <div class="snowflake l">❄</div><div class="snowflake l">❅</div>
+        <div class="snowflake l">❆</div><div class="snowflake l">❄</div>
+        <div class="snowflake m">❄</div><div class="snowflake m">❅</div>
+        <div class="snowflake m">❆</div><div class="snowflake m">❄</div>
+        <div class="snowflake m">❅</div><div class="snowflake m">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+        <div class="snowflake s">❅</div><div class="snowflake s">❆</div>
+        <div class="snowflake s">❄</div><div class="snowflake s">❅</div>
+        <div class="snowflake s">❆</div><div class="snowflake s">❄</div>
+    </div>
     <div class="test-container">
         <div id="selection-screen">
             <h2 style="color: var(--brown); margin-bottom: 20px;">Aparna's Study Lab ✍️</h2>

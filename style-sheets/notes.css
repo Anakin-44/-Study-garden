@@ -1,5 +1,5 @@
 body {
-    background-color: #f8f5f2; /* Soft warm background */
+    background-color: #1a1c1a; /* Midnight Charcoal */
     font-family: 'Quicksand', sans-serif;
     margin: 0;
     padding: 0;
@@ -28,63 +28,115 @@ header {
 
 .back-link {
     text-decoration: none;
-    color: #a47e65;
+    color: #d7bba8; /* Soft Latte Brown */
     font-weight: 700;
     font-size: 0.9rem;
 }
 
 #save-indicator {
     font-size: 0.75rem;
-    color: #7fb069;
+    color: #a8d59a; /* Glowing Sage */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
 h1 { 
-    color: #5d4d42; 
+    color: #a8d59a; /* Glowing Sage */
     margin: 10px 0; 
     font-size: 1.8rem; 
 }
 
 .paper-container {
     flex-grow: 1;
-    background: white;
+    background: #252825; /* Dark Card Background */
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     display: flex;
     overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 #full-note-area {
     flex-grow: 1;
     width: 100%;
-    padding: 32px 20px 32px 55px; /* Aligned with line height */
+    padding: 32px 20px 32px 55px; 
     border: none;
     outline: none;
     resize: none;
     font-size: 1.1rem;
     font-family: 'Quicksand', sans-serif;
-    color: #444;
+    color: #f5f5f5; /* Off-white text for readability */
     
-    /* THE MAGIC: 32px Line Height and Background Size must match */
+    /* Structure remains identical, colors updated for Dark Mode */
     line-height: 32px; 
     background-attachment: local;
     background-image: 
-        /* The Pink Margin Line */
-        linear-gradient(to right, transparent 45px, #ffadad 45px, #ffadad 46px, transparent 46px),
-        /* The Blue Horizontal Lines */
-        linear-gradient(to bottom, #eef6f7 1px, transparent 1px);
+        /* The Margin Line (Deep Berry/Pink) */
+        linear-gradient(to right, transparent 45px, #5a4044 45px, #5a4044 46px, transparent 46px),
+        /* The Horizontal Lines (Subtle Midnight Grey) */
+        linear-gradient(to bottom, #353a35 1px, transparent 1px);
     background-size: 100% 32px;
     
-    background-color: white;
+    background-color: #252825; /* Matches paper-container */
 }
 
-/* Smooth scrollbar for Chrome/Safari */
+/* Smooth scrollbar for Dark Mode */
 #full-note-area::-webkit-scrollbar {
     width: 5px;
 }
 #full-note-area::-webkit-scrollbar-thumb {
-    background: #e0d8d0;
+    background: #353a35;
     border-radius: 10px;
 }
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Keep them behind cards (which should be z-index: 2 or higher) */
+    color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(168, 213, 154, 0.5); /* Soft Sage glow to match Piku */
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+/* Ensure the container is visible */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; 
+}
+
+/* Animations for falling and swaying */
+@keyframes snowflakes-fall {
+    0% { top: -10%; }
+    100% { top: 100%; }
+}
+
+@keyframes snowflakes-shake {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(80px); }
+}
+
+/* Varying sizes and speeds */
+.snowflake.l { font-size: 1.5rem; animation-duration: 12s, 3s; opacity: 0.6; }
+.snowflake.m { font-size: 1rem; animation-duration: 8s, 2.5s; opacity: 0.4; }
+.snowflake.s { font-size: 0.6rem; animation-duration: 6s, 2s; opacity: 0.3; }
+
+/* Randomize positions for each flake (Add more if needed) */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s, 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s, 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 0.5s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 1s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }

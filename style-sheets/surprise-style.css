@@ -1,10 +1,12 @@
 :root {
-    --bg-color: #fdfaf6;
-    --primary-color: #7fb069; /* Soft Piku Green */
+    /* Midnight Palette */
+    --bg-color: #1a1c1a;        /* Midnight Charcoal */
+    --primary-color: #a8d59a;   /* Glowing Sage (Piku's Color) */
     --secondary-color: #f4cfdf; /* Soft Rose */
-    --accent-color: #ffb347; /* Warm Orange */
-    --text-main: #4a3728;
-    --card-bg: #ffffff;
+    --accent-color: #ffb347;    /* Warm Orange */
+    --text-main: #f5f5f5;       /* Light Text */
+    --card-bg: #252825;         /* Dark Card Background */
+    --brown-latte: #d7bba8;     /* Soft Latte Brown */
 }
 
 body {
@@ -15,36 +17,52 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
 }
 
-/* Header Section */
+/* --- HEADER SECTION FIX --- */
 .arcade-header {
     text-align: center;
     padding: 60px 20px 30px;
     animation: fadeInDown 0.8s ease;
 }
 
+/* This forces the text and image to stack vertically */
 .arcade-header h1 {
     font-size: 2.5rem;
     margin: 0;
     color: var(--primary-color);
     letter-spacing: -1px;
+    display: flex;
+    flex-direction: column; /* Stacks text and then the image */
+    align-items: center;    /* Centers them horizontally */
+    gap: 15px;              /* Space between text and Piku */
+}
+
+/* Piku is now centered below the text */
+.header-piku {
+    height: 65px; /* Made slightly bigger since it's now a focal point */
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(168, 213, 154, 0.4));
+    animation: pikuFloat 3s ease-in-out infinite;
+    margin: 0 auto;
 }
 
 .arcade-header p {
     font-size: 1.1rem;
-    opacity: 0.7;
-    margin-top: 10px;
+    color: var(--brown-latte);
+    opacity: 0.8;
+    margin-top: 20px;
 }
 
-/* Game Grid */
+/* --- GAME GRID --- */
 .game-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     width: 90%;
     max-width: 950px;
-    padding: 40px 0;
+    padding: 20px 0 40px;
 }
 
 /* Individual Game Cards */
@@ -54,10 +72,10 @@ body {
     padding: 40px 20px;
     text-align: center;
     text-decoration: none;
-    color: inherit;
+    color: var(--text-main);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 2px solid transparent;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,8 +83,8 @@ body {
 
 .arcade-card:hover {
     transform: translateY(-12px);
-    border-color: var(--secondary-color);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 15px 35px rgba(168, 213, 154, 0.15);
 }
 
 .card-icon {
@@ -77,58 +95,91 @@ body {
 .arcade-card h3 {
     margin: 10px 0;
     font-size: 1.4rem;
+    color: var(--primary-color);
 }
 
 .arcade-card p {
     font-size: 0.95rem;
-    opacity: 0.6;
-    line-height: 1.4;
+    color: var(--brown-latte);
+    opacity: 0.8;
 }
 
 /* Coming Soon Style */
 .soon {
-    background: rgba(0,0,0,0.02);
-    border: 2px dashed #ddd;
+    background: rgba(255,255,255,0.02);
+    border: 2px dashed #353a35;
     cursor: default;
+    opacity: 0.6;
 }
 
-.soon:hover {
-    transform: none;
-    border-color: #ddd;
-}
-
-/* Animations */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Add this to your existing CSS file */
-
-.header-piku {
-    height: 50px; /* Adjust this to match your font size */
-    width: auto;
-    vertical-align: middle;
-    margin-left: 10px;
-    /* Optional: adds a little floating animation to make him look alive */
-    animation: pikuFloat 3s ease-in-out infinite;
-}
-
-@keyframes pikuFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
+/* Back Link */
 .back-link-style {
     display: inline-block;
     margin-bottom: 50px;
-    color: #a47e65;
+    color: var(--brown-latte);
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
 }
 
-.back-link-style:hover {
-    color: #7fb069;
-    transform: translateX(-5px);
+/* Animations */
+@keyframes pikuFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Keep them behind cards (which should be z-index: 2 or higher) */
+    color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(168, 213, 154, 0.5); /* Soft Sage glow to match Piku */
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+/* Ensure the container is visible */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; 
+}
+
+/* Animations for falling and swaying */
+@keyframes snowflakes-fall {
+    0% { top: -10%; }
+    100% { top: 100%; }
+}
+
+@keyframes snowflakes-shake {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(80px); }
+}
+
+/* Varying sizes and speeds */
+.snowflake.l { font-size: 1.5rem; animation-duration: 12s, 3s; opacity: 0.6; }
+.snowflake.m { font-size: 1rem; animation-duration: 8s, 2.5s; opacity: 0.4; }
+.snowflake.s { font-size: 0.6rem; animation-duration: 6s, 2s; opacity: 0.3; }
+
+/* Randomize positions for each flake (Add more if needed) */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s, 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s, 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 0.5s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 1s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }

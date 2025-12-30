@@ -1,43 +1,48 @@
 :root {
-    --bg: #fff9f2;      /* Warm peach-white */
-    --sage: #7fb069;    /* Sage Green */
-    --brown: #a47e65;   /* Earthy Brown */
-    --pink: #f2c6c2;    /* Tape Pink */
-    --text: #4a4a4a;
+    /* New Deep "Midnight Garden" Palette */
+    --bg: #1a1c1a;        /* Deep matte charcoal (softer than black) */
+    --card: #252825;      /* Slightly lighter forest grey for containers */
+    --sage: #a8d59a;      /* Glowing sage (made lighter for contrast) */
+    --brown: #d7bba8;     /* Warm latte/creme for text */
+    --pink: #5a4044;      /* Deep muted wine for the tape */
+    --pink-text: #f2c6c2; /* Soft pink for text accents */
+    --border: #353a35;    /* Subtle border for inputs */
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif; /* Rounded theme font */
+    font-family: 'Quicksand', sans-serif;
 }
 
 body {
-    /* Prevents the rubber-band scrolling and pull-to-refresh */
     overscroll-behavior-y: contain; 
-    /* Prevents the blue highlight when clicking buttons */
     -webkit-tap-highlight-color: transparent;
-    /* Prevents accidental text selection while clicking fast */
     user-select: none;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--bg); /* Removed harsh purple gradient */
+    background-color: var(--bg);
+    /* Subtle glowing vignette to keep it cozy */
+    background: radial-gradient(circle at center, #222822 0%, #1a1c1a 100%);
 }
 
 .login-container {
-    background: #fff;
+    background: var(--card);
     padding: 40px 30px 30px 30px;
     width: 320px;
-    border-radius: 20px; /* Rounder corners */
-    box-shadow: 0 10px 30px rgba(164, 126, 101, 0.15);
+    border-radius: 24px;
+    /* Soft dark shadow instead of earthy brown */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     position: relative;
+    /* Sage border now looks like it's glowing slightly */
     border-bottom: 5px solid var(--sage);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Cozy Washi Tape at the top */
+/* Cozy Washi Tape at the top - now deep velvet pink */
 .washi-tape {
     width: 100px;
     height: 25px;
@@ -46,31 +51,43 @@ body {
     top: -12px;
     left: 50%;
     transform: translateX(-50%) rotate(-2deg);
-    opacity: 0.8;
+    opacity: 0.9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .login-container h2 {
     text-align: center;
     margin-bottom: 25px;
-    color: var(--brown);
+    color: var(--brown); /* Soft latte color */
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 .login-container input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border-radius: 12px;
-    border: 2px solid #f0e6dd;
+    border-radius: 14px;
+    background: #2d322d; /* Dark input bg */
+    border: 2px solid var(--border);
+    color: #fff;
     outline: none;
-    transition: border-color 0.3s;
+    transition: all 0.3s;
+    font-size: 16px;
+}
+
+/* Readonly username looks slightly dimmed */
+#username {
+    color: var(--sage);
+    opacity: 0.8;
 }
 
 .login-container input:focus {
     border-color: var(--sage);
+    background: #333933;
+    box-shadow: 0 0 10px rgba(168, 213, 154, 0.1);
 }
 
-/* Password Group Layout Fix */
 #passDiv {
     display: flex;
     align-items: center;
@@ -78,14 +95,17 @@ body {
 }
 
 #showPass {
-    background: #f8f1eb;
-    border: none;
-    border-radius: 10px;
-    height: 45px;
-    width: 50px;
+    background: #333933;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    height: 48px;
+    width: 55px;
     cursor: pointer;
     font-size: 18px;
     transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #showPass:active {
@@ -94,21 +114,21 @@ body {
 
 #login {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     background: var(--sage);
-    color: white;
+    color: #1a1c1a; /* Dark text on light button for readability */
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
     margin-top: 15px;
-    box-shadow: 0 4px 10px rgba(127, 176, 105, 0.3);
-    transition: background 0.3s;
+    box-shadow: 0 4px 15px rgba(168, 213, 154, 0.2);
+    transition: all 0.3s;
 }
 
-#login:hover {
-    background: #6e9a5a;
+#login:active {
+    transform: scale(0.98);
 }
 
 /* Message Styles */
@@ -119,5 +139,64 @@ body {
     font-weight: 500;
 }
 
-.error { color: #d68c67; } /* Terracotta error color */
+.error { color: #f2c6c2; } /* Soft pink for errors to keep it cute */
 .success { color: var(--sage); }
+
+/* Support for iPhone Notch/Home Bar */
+@supports (padding: env(safe-area-inset-bottom)) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+.snowflake {
+    position: fixed;
+    top: -10%;
+    z-index: 1; /* Keep them behind cards (which should be z-index: 2 or higher) */
+    color: rgba(255, 255, 255, 0.4); /* Semi-transparent white */
+    text-shadow: 0 0 5px rgba(168, 213, 154, 0.5); /* Soft Sage glow to match Piku */
+    user-select: none;
+    pointer-events: none;
+    animation-name: snowflakes-fall, snowflakes-shake;
+    animation-duration: 10s, 3s;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite, infinite;
+}
+
+/* Ensure the container is visible */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; 
+}
+
+/* Animations for falling and swaying */
+@keyframes snowflakes-fall {
+    0% { top: -10%; }
+    100% { top: 100%; }
+}
+
+@keyframes snowflakes-shake {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(80px); }
+}
+
+/* Varying sizes and speeds */
+.snowflake.l { font-size: 1.5rem; animation-duration: 12s, 3s; opacity: 0.6; }
+.snowflake.m { font-size: 1rem; animation-duration: 8s, 2.5s; opacity: 0.4; }
+.snowflake.s { font-size: 0.6rem; animation-duration: 6s, 2s; opacity: 0.3; }
+
+/* Randomize positions for each flake (Add more if needed) */
+.snowflake:nth-of-type(1) { left: 10%; animation-delay: 0s, 0s; }
+.snowflake:nth-of-type(2) { left: 20%; animation-delay: 1s, 1s; }
+.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 0.5s; }
+.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
+.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 1s; }
+.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
+.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
+.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
+.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
